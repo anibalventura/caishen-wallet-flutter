@@ -1,4 +1,4 @@
-package com.anibalventura.caishen_wallet
+package com.anibalventura.caishenwallet
 
 import io.flutter.embedding.android.FlutterActivity
 

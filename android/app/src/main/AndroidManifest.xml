@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anibalventura.caishen_wallet">
+    package="com.anibalventura.caishenwallet">
    <application
         android:label="caishen_wallet"
         android:name="${applicationName}"
