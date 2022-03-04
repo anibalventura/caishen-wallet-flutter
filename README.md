@@ -27,6 +27,11 @@
 
 ## Build
 
+1. Open Firebase console and create a new project.
+2. Enable email [authentication](https://firebase.google.com/docs/auth) and [Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart).
+3. Connect Firebase project to [flutter](https://firebase.flutter.dev/docs/overview/).
+4. Do `flutter run`
+
 # License
 
 ```xml
