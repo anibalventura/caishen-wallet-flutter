@@ -1,4 +1,5 @@
 {
+  "loading": "Loading...",
   "empty_form_field_error": "This field is required.",
   "///////////////////// Login Screen ///////////////////////": "",
   "email": "Email",

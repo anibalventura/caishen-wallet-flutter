@@ -10,9 +10,9 @@
 
 ## Features
 
-
 ## Dependencies
-- [app_tracking_transparency](https://pub.dev/packages/app_tracking_transparency)
+
+- [animated_text_kit](https://pub.dev/packages/animated_text_kit)
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 - [easy_localization](https://pub.dev/packages/easy_localization)
 - [firebase_auth](https://pub.dev/packages/firebase_auth)
@@ -20,9 +20,11 @@
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
 - [google_fonts](https://pub.dev/packages/google_fonts)
 - [google_mobile_ads](https://pub.dev/packages/google_mobile_ads)
+- [liquid_progress_indicator](https://pub.dev/packages/liquid_progress_indicator)
 - [provider](https://pub.dev/packages/provider)
 
 ### Dev Dependencies
+
 - [change_app_package_name](https://pub.dev/packages/change_app_package_name)
 - [very_good_analysis](https://pub.dev/packages/very_good_analysis)
 

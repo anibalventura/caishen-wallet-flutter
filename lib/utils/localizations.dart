@@ -5,6 +5,7 @@
 
 class LocaleTr {
   static const String appName = 'Caishen Wallet';
+  static const String loading = 'loading';
 
   // Errors.
   static const String emptyFormFieldError = 'empty_form_field_error';
