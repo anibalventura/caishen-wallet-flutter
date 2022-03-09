@@ -23,27 +23,35 @@ class LoginScreen extends StatelessWidget {
     late String _password;
 
     Future<void> _logIn() async {
-      if (Utils.validateForm(_formKey)) {
+      if (Utils.formIsValid(_formKey)) {
         final retVal = await Auth.signIn(_email, _password);
 
         if (retVal == 'Success') {
-          // ignore: unawaited_futures, use_build_context_synchronously
+          // ignore: unawaited_futures
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         } else {
-          showSnackbar(context: context, msg: retVal);
+          showSnackbar(
+            context: context,
+            msg: retVal,
+            color: Utils.theme(context).errorColor,
+          );
         }
       }
     }
 
     Future<void> _createAccount() async {
-      if (Utils.validateForm(_formKey)) {
+      if (Utils.formIsValid(_formKey)) {
         final retVal = await Auth.createAccount(_email, _password);
 
         if (retVal == 'Success') {
-          // ignore: unawaited_futures, use_build_context_synchronously
+          // ignore: unawaited_futures
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         } else {
-          showSnackbar(context: context, msg: retVal);
+          showSnackbar(
+            context: context,
+            msg: retVal,
+            color: Utils.theme(context).errorColor,
+          );
         }
       }
     }
@@ -56,21 +64,22 @@ class LoginScreen extends StatelessWidget {
             TextLiquidFill(
               text: LocaleTr.appName,
               boxHeight: 0.15.sh,
-              boxBackgroundColor: Colors.white,
+              waveColor: Utils.theme(context).colorScheme.primary,
+              boxBackgroundColor: Utils.theme(context).colorScheme.background,
               textStyle: TextStyle(
                 fontSize: 50.sp,
-                fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.sansitaSwashed().fontFamily,
               ),
             ),
             SizedBox(height: 0.01.sh),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 0.1.sw),
+              padding: EdgeInsets.symmetric(horizontal: 0.15.sw),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     OutlineFormField(
+                      // TODO(anibal): Save last email.
                       initialValue: '',
                       labelText: tr(LocaleTr.email),
                       onSaved: (value) => _email = value,
@@ -95,6 +104,9 @@ class LoginScreen extends StatelessWidget {
               onPressed: _createAccount,
               child: Text(
                 tr(LocaleTr.noAccount),
+                style: Utils.theme(context).textTheme.bodyText1!.copyWith(
+                      color: Utils.theme(context).colorScheme.secondary,
+                    ),
               ),
             ),
           ],

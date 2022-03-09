@@ -9,13 +9,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: const Text('LogOut'),
-        onPressed: () {
-          Auth.signOut();
-          Navigator.of(context).popAndPushNamed(LoginScreen.routeName);
-        },
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('LogOut'),
+          onPressed: () {
+            Auth.signOut();
+            Navigator.of(context).popAndPushNamed(LoginScreen.routeName);
+          },
+        ),
       ),
     );
   }

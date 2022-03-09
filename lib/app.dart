@@ -7,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore_for_file: prefer_const_constructors
 class CaishenWalletApp extends StatelessWidget {
   const CaishenWalletApp({Key? key}) : super(key: key);
 
@@ -22,8 +23,8 @@ class CaishenWalletApp extends StatelessWidget {
               ? HomeScreen.routeName
               : LoginScreen.routeName,
           routes: {
-            LoginScreen.routeName: (_) => const LoginScreen(),
-            HomeScreen.routeName: (_) => const HomeScreen(),
+            LoginScreen.routeName: (_) => LoginScreen(),
+            HomeScreen.routeName: (_) => HomeScreen(),
           },
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
