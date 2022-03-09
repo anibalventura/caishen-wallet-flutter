@@ -1,0 +1,9 @@
+{
+  "loading": "Cargando...",
+  "empty_form_field_error": "Este campo es obligatorio.",
+  "///////////////////// Login Screen ///////////////////////": "",
+  "email": "Correo",
+  "password": "Contraseña",
+  "login": "Iniciar sesión",
+  "no_account": "No eres un usuario? Crear una cuenta"
+}
