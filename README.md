@@ -15,6 +15,7 @@
 - [app_tracking_transparency](https://pub.dev/packages/app_tracking_transparency)
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 - [easy_localization](https://pub.dev/packages/easy_localization)
+- [firebase_auth](https://pub.dev/packages/firebase_auth)
 - [firebase_core](https://pub.dev/packages/firebase_core)
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
 - [google_fonts](https://pub.dev/packages/google_fonts)

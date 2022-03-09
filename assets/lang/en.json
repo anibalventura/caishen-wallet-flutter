@@ -1,3 +1,8 @@
 {
-  
+  "empty_form_field_error": "This field is required.",
+  "///////////////////// Login Screen ///////////////////////": "",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "no_account": "Not an user? Create account"
 }
