@@ -51,7 +51,7 @@ class OutlineFormField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: _borderRadius,
           borderSide: BorderSide(
-            color: Utils.theme(context).colorScheme.onError,
+            color: Utils.theme(context).errorColor,
           ),
         ),
       ),

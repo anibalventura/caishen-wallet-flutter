@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:caishen_wallet/services/auth.dart';
-import 'package:caishen_wallet/ui/screens/home_screen.dart';
 import 'package:caishen_wallet/ui/widgets/outline_form_field_widget.dart';
 import 'package:caishen_wallet/ui/widgets/round_button_widget.dart';
 import 'package:caishen_wallet/ui/widgets/snackbar_widget.dart';
@@ -26,10 +25,7 @@ class LoginScreen extends StatelessWidget {
       if (Utils.formIsValid(_formKey)) {
         final retVal = await Auth.signIn(_email, _password);
 
-        if (retVal == 'Success') {
-          // ignore: unawaited_futures
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        } else {
+        if (retVal != 'Success') {
           showSnackbar(
             context: context,
             msg: retVal,
@@ -43,10 +39,7 @@ class LoginScreen extends StatelessWidget {
       if (Utils.formIsValid(_formKey)) {
         final retVal = await Auth.createAccount(_email, _password);
 
-        if (retVal == 'Success') {
-          // ignore: unawaited_futures
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        } else {
+        if (retVal != 'Success') {
           showSnackbar(
             context: context,
             msg: retVal,

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
   static final FirebaseAuth auth = FirebaseAuth.instance;
+  Stream<User?> get user => auth.authStateChanges();
 
   static Future<String> createAccount(String email, String password) async {
     try {

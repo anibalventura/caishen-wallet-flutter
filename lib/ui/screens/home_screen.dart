@@ -1,5 +1,4 @@
 import 'package:caishen_wallet/services/auth.dart';
-import 'package:caishen_wallet/ui/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,14 +8,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: ElevatedButton(
-          child: const Text('LogOut'),
-          onPressed: () {
-            Auth.signOut();
-            Navigator.of(context).popAndPushNamed(LoginScreen.routeName);
-          },
+          onPressed: Auth.signOut,
+          child: Text('LogOut'),
         ),
       ),
     );
