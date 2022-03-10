@@ -1,9 +1,9 @@
 import 'package:caishen_wallet/services/auth.dart';
 import 'package:caishen_wallet/ui/screens/dashboard_screen.dart';
-import 'package:caishen_wallet/ui/screens/expenses_screen.dart';
 import 'package:caishen_wallet/ui/screens/home_screen.dart';
 import 'package:caishen_wallet/ui/screens/login_screen.dart';
 import 'package:caishen_wallet/ui/screens/more_screen.dart';
+import 'package:caishen_wallet/ui/screens/transactions_screen.dart';
 import 'package:caishen_wallet/ui/themes.dart';
 import 'package:caishen_wallet/ui/widgets/liquid_progress_indicator_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
@@ -28,7 +28,7 @@ class CaishenWalletApp extends StatelessWidget {
             LoginScreen.routeName: (_) => LoginScreen(),
             HomeScreen.routeName: (_) => HomeScreen(),
             DashboardScreen.routeName: (_) => DashboardScreen(),
-            ExpensesScreen.routeName: (_) => ExpensesScreen(),
+            TransactionsScreen.routeName: (_) => TransactionsScreen(),
             MoreScreen.routeName: (_) => MoreScreen(),
           },
           home: StreamBuilder(

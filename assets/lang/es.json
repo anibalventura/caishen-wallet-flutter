@@ -8,8 +8,8 @@
   "no_account": "No eres un usuario? Crear una cuenta",
   "/////////////////// Dashboard Screen /////////////////////": "",
   "dashboard": "Dashboard",
-  "/////////////////// Expenses Screen /////////////////////": "",
-  "expenses": "Gastos",
+  "/////////////////// Transactions Screen /////////////////////": "",
+  "transactions": "Transacciones",
   "///////////////////// More Screen ///////////////////////": "",
   "more": "Más"
 }

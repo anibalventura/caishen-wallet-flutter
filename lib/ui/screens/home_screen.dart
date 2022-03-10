@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:caishen_wallet/ui/screens/dashboard_screen.dart';
-import 'package:caishen_wallet/ui/screens/expenses_screen.dart';
 import 'package:caishen_wallet/ui/screens/more_screen.dart';
+import 'package:caishen_wallet/ui/screens/transactions_screen.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,7 +22,7 @@ class _HomeScreen extends State<HomeScreen> {
 
   final List<Widget> _navOptions = const [
     DashboardScreen(),
-    ExpensesScreen(),
+    TransactionsScreen(),
     MoreScreen(),
   ];
 
@@ -45,7 +45,7 @@ class _HomeScreen extends State<HomeScreen> {
             ),
           ),
           BottomNavigationBarItem(
-            label: tr(LocaleTr.expenses),
+            label: tr(LocaleTr.transactions),
             icon: Icon(
               Platform.isAndroid
                   ? Icons.list_alt_rounded

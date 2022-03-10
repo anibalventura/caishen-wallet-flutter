@@ -19,8 +19,8 @@ class LocaleTr {
   // Dashboard Screen.
   static const String dashboard = 'dashboard';
 
-  // Expenses Screen.
-  static const String expenses = 'expenses';
+  // Transactions Screen.
+  static const String transactions = 'transactions';
 
   // More Screen.
   static const String more = 'more';
