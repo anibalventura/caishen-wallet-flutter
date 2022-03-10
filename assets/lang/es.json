@@ -5,5 +5,11 @@
   "email": "Correo",
   "password": "Contraseña",
   "login": "Iniciar sesión",
-  "no_account": "No eres un usuario? Crear una cuenta"
+  "no_account": "No eres un usuario? Crear una cuenta",
+  "/////////////////// Dashboard Screen /////////////////////": "",
+  "dashboard": "Dashboard",
+  "/////////////////// Expenses Screen /////////////////////": "",
+  "expenses": "Gastos",
+  "///////////////////// More Screen ///////////////////////": "",
+  "more": "Más"
 }

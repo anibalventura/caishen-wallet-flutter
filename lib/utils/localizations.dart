@@ -15,4 +15,13 @@ class LocaleTr {
   static const String password = 'password';
   static const String login = 'login';
   static const String noAccount = 'no_account';
+
+  // Dashboard Screen.
+  static const String dashboard = 'dashboard';
+
+  // Expenses Screen.
+  static const String expenses = 'expenses';
+
+  // More Screen.
+  static const String more = 'more';
 }
