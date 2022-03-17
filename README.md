@@ -13,6 +13,7 @@
 ## Dependencies
 
 - [animated_text_kit](https://pub.dev/packages/animated_text_kit)
+- [cloud_firestore](https://pub.dev/packages/cloud_firestore)
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 - [easy_localization](https://pub.dev/packages/easy_localization)
 - [firebase_auth](https://pub.dev/packages/firebase_auth)

@@ -6,7 +6,6 @@ class Themes {
   /*
   * Colors.
   */
-  static const Color _secondaryTextColor = Colors.white;
 
   // Light.
   static const Color _lightPrimaryColor = Color(0xFF00C897);
@@ -26,7 +25,11 @@ class Themes {
 
   static final TextStyle _headlineText1 = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final TextStyle _headlineText2 = _headlineText1.copyWith(
+    fontWeight: FontWeight.w700,
   );
 
   static final TextStyle _bodyText1 = TextStyle(
@@ -34,8 +37,7 @@ class Themes {
     fontWeight: FontWeight.w500,
   );
 
-  static final TextStyle _bodyText2 = TextStyle(
-    fontSize: 14.sp,
+  static final TextStyle _bodyText2 = _bodyText1.copyWith(
     fontWeight: FontWeight.w700,
   );
 
@@ -46,6 +48,9 @@ class Themes {
   // Light.
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: _lightBackgroundColor,
+    iconTheme: const IconThemeData(
+      color: _lightSecondaryColor,
+    ),
     colorScheme: const ColorScheme.light(
       primary: _lightPrimaryColor,
       secondary: _lightSecondaryColor,
@@ -54,14 +59,14 @@ class Themes {
       headline1: _headlineText1.copyWith(
         color: _lightPrimaryTextColor,
       ),
-      headline2: _headlineText1.copyWith(
-        color: _secondaryTextColor,
+      headline2: _headlineText2.copyWith(
+        color: _lightPrimaryTextColor,
       ),
       bodyText1: _bodyText1.copyWith(
         color: _lightPrimaryTextColor,
       ),
       bodyText2: _bodyText2.copyWith(
-        color: _secondaryTextColor,
+        color: _lightPrimaryTextColor,
       ),
     ),
     fontFamily: GoogleFonts.roboto().fontFamily,
@@ -70,6 +75,9 @@ class Themes {
   // Dark.
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: _darkBackgroundColor,
+    iconTheme: const IconThemeData(
+      color: _darkSecondaryColor,
+    ),
     colorScheme: const ColorScheme.dark(
       primary: _darkPrimaryColor,
       secondary: _darkSecondaryColor,
@@ -80,7 +88,13 @@ class Themes {
       headline1: _headlineText1.copyWith(
         color: _darkPrimaryTextColor,
       ),
+      headline2: _headlineText2.copyWith(
+        color: _darkPrimaryTextColor,
+      ),
       bodyText1: _bodyText1.copyWith(
+        color: _darkPrimaryTextColor,
+      ),
+      bodyText2: _bodyText2.copyWith(
         color: _darkPrimaryTextColor,
       ),
     ),

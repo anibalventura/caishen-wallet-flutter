@@ -18,12 +18,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
-  final List<Widget> _navOptions = const [
-    DashboardScreen(),
+  final List<Widget> _navOptions = [
+    const DashboardScreen(),
     TransactionsScreen(),
-    MoreScreen(),
+    const MoreScreen(),
   ];
 
   @override
@@ -57,7 +57,7 @@ class _HomeScreen extends State<HomeScreen> {
             icon: Icon(
               Platform.isAndroid
                   ? Icons.more_horiz_rounded
-                  : CupertinoIcons.dot_square,
+                  : CupertinoIcons.ellipsis,
             ),
           ),
         ],
