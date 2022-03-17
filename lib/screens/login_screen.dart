@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
+import 'package:caishen_wallet/screens/widgets/round_button_widget.dart';
+import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/services/auth.dart';
-import 'package:caishen_wallet/ui/widgets/outline_form_field_widget.dart';
-import 'package:caishen_wallet/ui/widgets/round_button_widget.dart';
-import 'package:caishen_wallet/ui/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,9 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
-  static const String routeName = '/login_screen';
+  const LoginScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +74,13 @@ class LoginScreen extends StatelessWidget {
                     OutlineFormField(
                       // TODO(anibal): Save last email.
                       initialValue: '',
-                      labelText: tr(LocaleTr.email),
+                      labelText: tr(LocaleTr.loginEmail),
                       onSaved: (value) => _email = value,
                     ),
                     SizedBox(height: 0.02.sh),
                     OutlineFormField(
                       obscureText: true,
-                      labelText: tr(LocaleTr.password),
+                      labelText: tr(LocaleTr.loginPassword),
                       onSaved: (value) => _password = value,
                     ),
                   ],
@@ -89,14 +89,14 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 0.02.sh),
             RoundButton(
-              title: tr(LocaleTr.login),
+              title: tr(LocaleTr.loginSignIn),
               onPressed: _logIn,
             ),
             SizedBox(height: 0.05.sh),
             TextButton(
               onPressed: _createAccount,
               child: Text(
-                tr(LocaleTr.noAccount),
+                tr(LocaleTr.loginNoAccount),
                 style: Utils.theme(context).textTheme.bodyText1!.copyWith(
                       color: Utils.theme(context).colorScheme.secondary,
                     ),

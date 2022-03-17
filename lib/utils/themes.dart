@@ -6,6 +6,7 @@ class Themes {
   /*
   * Colors.
   */
+
   static const Color _secondaryTextColor = Colors.white;
 
   // Light.
@@ -46,6 +47,9 @@ class Themes {
   // Light.
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: _lightBackgroundColor,
+    iconTheme: const IconThemeData(
+      color: _lightSecondaryColor,
+    ),
     colorScheme: const ColorScheme.light(
       primary: _lightPrimaryColor,
       secondary: _lightSecondaryColor,
@@ -70,6 +74,9 @@ class Themes {
   // Dark.
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: _darkBackgroundColor,
+    iconTheme: const IconThemeData(
+      color: _darkSecondaryColor,
+    ),
     colorScheme: const ColorScheme.dark(
       primary: _darkPrimaryColor,
       secondary: _darkSecondaryColor,

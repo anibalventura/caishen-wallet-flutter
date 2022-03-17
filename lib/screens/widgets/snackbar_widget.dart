@@ -13,7 +13,9 @@ void showSnackbar({
       duration: const Duration(milliseconds: 2500),
       content: Text(
         msg,
-        style: Utils.theme(context).textTheme.bodyText2,
+        style: Utils.theme(context).textTheme.bodyText2!.copyWith(
+              color: Colors.white,
+            ),
       ),
       behavior: behavior ?? SnackBarBehavior.floating,
     ),
