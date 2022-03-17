@@ -17,7 +17,9 @@ import 'package:provider/provider.dart';
 
 // ignore_for_file: prefer_const_constructors
 class CaishenWalletApp extends StatelessWidget {
-  const CaishenWalletApp({Key? key}) : super(key: key);
+  const CaishenWalletApp({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

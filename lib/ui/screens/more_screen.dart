@@ -2,7 +2,9 @@ import 'package:caishen_wallet/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class MoreScreen extends StatelessWidget {
-  const MoreScreen({Key? key}) : super(key: key);
+  const MoreScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const String routeName = '/more_screen';
 

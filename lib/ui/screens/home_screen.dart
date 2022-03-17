@@ -9,7 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const String routeName = '/home_screen';
 

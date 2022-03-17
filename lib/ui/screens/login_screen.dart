@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const String routeName = '/login_screen';
 

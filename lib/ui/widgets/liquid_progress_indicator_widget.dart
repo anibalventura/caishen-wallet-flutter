@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 class LiquidProgressIndicator extends StatelessWidget {
-  const LiquidProgressIndicator({Key? key}) : super(key: key);
+  const LiquidProgressIndicator({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

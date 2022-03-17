@@ -2,7 +2,9 @@ import 'package:caishen_wallet/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const String routeName = '/dashboard_screen';
 

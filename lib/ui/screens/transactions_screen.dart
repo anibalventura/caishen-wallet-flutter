@@ -9,7 +9,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsScreen extends StatelessWidget {
-  TransactionsScreen({Key? key}) : super(key: key);
+  TransactionsScreen({
+    Key? key,
+  }) : super(key: key);
 
   static const String routeName = '/transactions_screen';
 
