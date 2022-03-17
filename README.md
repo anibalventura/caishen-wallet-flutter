@@ -6,7 +6,7 @@
 [![Lint: very good analysis](https://img.shields.io/badge/Lint-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](LICENSE)
 
-<!-- <img src="assets/images/repository/repository_banner.png" align="center"/> -->
+<img src="app_preview_banner.png" align="center"/>
 
 Spending tracker app with [Firebase](https://firebase.google.com) as backend and MVC architecture pattern.
 
@@ -26,6 +26,7 @@ Spending tracker app with [Firebase](https://firebase.google.com) as backend and
 - [ ] Edit/delete transactions.
 - [ ] Profile screen with user details.
 - [ ] Settings screen with CRUD for payment and category lists.
+- [ ] Save last email enter on login screen.
 
 ## Development
 
