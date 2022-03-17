@@ -36,7 +36,7 @@ class TransactionItem extends StatelessWidget {
               children: [
                 Text(
                   transaction.category!,
-                  style: Utils.theme(context).textTheme.headline2,
+                  style: Utils.theme(context).textTheme.headline1,
                 ),
                 SizedBox(height: 0.005.sh),
                 Text(

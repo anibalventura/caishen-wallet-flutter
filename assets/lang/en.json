@@ -6,9 +6,9 @@
   "empty_form_field_error": "This field is required.",
   "complete_field_error": "Complete all fields.",
   "///////////////////// Login Screen ///////////////////////": "",
-  "login": "Login",
   "login_email": "Email",
   "login_password": "Password",
+  "login_sign_in": "Sign in",
   "login_no_account": "Not an user? Create account",
   "/////////////////// Dashboard Screen /////////////////////": "",
   "dashboard": "Dashboard",
@@ -40,5 +40,9 @@
   "date_picker_select": "Select",
   "transaction_description": "Description",
   "///////////////////// More Screen ///////////////////////": "",
-  "more": "More"
+  "more": "More",
+  "more_profile": "Profile",
+  "profile_sign_out": "Sign out",
+  "more_settings": "Settings",
+  "more_about": "About"
 }

@@ -15,8 +15,6 @@ class LoginScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  static const String routeName = '/login_screen';
-
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -76,13 +74,13 @@ class LoginScreen extends StatelessWidget {
                     OutlineFormField(
                       // TODO(anibal): Save last email.
                       initialValue: '',
-                      labelText: tr(LocaleTr.email),
+                      labelText: tr(LocaleTr.loginEmail),
                       onSaved: (value) => _email = value,
                     ),
                     SizedBox(height: 0.02.sh),
                     OutlineFormField(
                       obscureText: true,
-                      labelText: tr(LocaleTr.password),
+                      labelText: tr(LocaleTr.loginPassword),
                       onSaved: (value) => _password = value,
                     ),
                   ],
@@ -91,14 +89,14 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 0.02.sh),
             RoundButton(
-              title: tr(LocaleTr.login),
+              title: tr(LocaleTr.loginSignIn),
               onPressed: _logIn,
             ),
             SizedBox(height: 0.05.sh),
             TextButton(
               onPressed: _createAccount,
               child: Text(
-                tr(LocaleTr.noAccount),
+                tr(LocaleTr.loginNoAccount),
                 style: Utils.theme(context).textTheme.bodyText1!.copyWith(
                       color: Utils.theme(context).colorScheme.secondary,
                     ),

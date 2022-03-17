@@ -14,10 +14,10 @@ class LocaleTr {
   static const String completeFieldError = 'complete_field_error';
 
   // Login Screen.
-  static const String email = 'email';
-  static const String password = 'password';
-  static const String login = 'login';
-  static const String noAccount = 'no_account';
+  static const String loginEmail = 'login_email';
+  static const String loginPassword = 'login_password';
+  static const String loginSignIn = 'login_sign_in';
+  static const String loginNoAccount = 'login_no_account';
 
   // Dashboard Screen.
   static const String dashboard = 'dashboard';
@@ -52,4 +52,8 @@ class LocaleTr {
 
   // More Screen.
   static const String more = 'more';
+  static const String moreProfile = 'more_profile';
+  static const String profileSignOut = 'profile_sign_out';
+  static const String moreSettings = 'more_settings';
+  static const String moreAbout = 'more_about';
 }
