@@ -12,20 +12,20 @@ Spending tracker app with [Firebase](https://firebase.google.com) as backend and
 
 ## Features
 
-- Login and register a new user with email and password.
-- Logout current user.
-- Create and see transactions.
+- Create new user with email ans password.
+- Sign in with email and password.
+- Sign out current user.
+- Create and view transactions.
 - Localization (English/Spanish).
 
-### TODO
+### To do
 
-- [] App icon, splash screen and night mode.
-- [] Dashboard screen.
-- [] Profile screen.
-- [] Filter transactions.
-- [] CRUD payment list.
-- [] CRUD category list.
-- [] CRUD category list.
+- [ ] App icon, splash screen and night mode.
+- [ ] Dashboard screen with expenses and incomes.
+- [ ] Filters for transaction screen.
+- [ ] Edit/delete transactions.
+- [ ] Profile screen with user details.
+- [ ] Settings screen with CRUD for payment and category lists.
 
 ## Development
 
