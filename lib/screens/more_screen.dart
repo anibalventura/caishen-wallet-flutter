@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:caishen_wallet/ui/screens/profile_screen.dart';
-import 'package:caishen_wallet/ui/widgets/more_item_widget.dart';
-import 'package:caishen_wallet/ui/widgets/snackbar_widget.dart';
+import 'package:caishen_wallet/screens/profile_screen.dart';
+import 'package:caishen_wallet/screens/widgets/more_item_widget.dart';
+import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';

@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
+import 'package:caishen_wallet/screens/widgets/round_button_widget.dart';
+import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/services/auth.dart';
-import 'package:caishen_wallet/ui/widgets/outline_form_field_widget.dart';
-import 'package:caishen_wallet/ui/widgets/round_button_widget.dart';
-import 'package:caishen_wallet/ui/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:caishen_wallet/ui/screens/dashboard_screen.dart';
-import 'package:caishen_wallet/ui/screens/more_screen.dart';
-import 'package:caishen_wallet/ui/screens/transactions_screen.dart';
+import 'package:caishen_wallet/screens/dashboard_screen.dart';
+import 'package:caishen_wallet/screens/more_screen.dart';
+import 'package:caishen_wallet/screens/transactions_screen.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';

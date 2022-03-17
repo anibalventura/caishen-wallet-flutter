@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 Future<void> main() async {
-  // Binding widgets.
   WidgetsFlutterBinding.ensureInitialized();
 
   // Init locale translations.
@@ -24,7 +23,6 @@ Future<void> main() async {
   ]);
 
   runApp(
-    // Init locale translations.
     EasyLocalization(
       path: 'assets/lang',
       fallbackLocale: const Locale('en'),
@@ -32,8 +30,7 @@ Future<void> main() async {
         Locale('en'),
         Locale('es'),
       ],
-      // ignore: prefer_const_constructors
-      child: CaishenWalletApp(),
+      child: const CaishenWalletApp(),
     ),
   );
 }

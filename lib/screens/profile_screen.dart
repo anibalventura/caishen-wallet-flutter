@@ -1,5 +1,5 @@
+import 'package:caishen_wallet/screens/widgets/round_button_widget.dart';
 import 'package:caishen_wallet/services/auth.dart';
-import 'package:caishen_wallet/ui/widgets/round_button_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';

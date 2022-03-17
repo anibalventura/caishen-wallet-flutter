@@ -1,4 +1,4 @@
-import 'package:caishen_wallet/data/models/transaction_model.dart';
+import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
