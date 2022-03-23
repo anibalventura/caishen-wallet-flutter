@@ -12,9 +12,8 @@ Spending tracker app with [Firebase](https://firebase.google.com) as backend and
 
 ## Features
 
-- Create new user with email ans password.
-- Sign in with email and password.
-- Sign out current user.
+- Create new user with email and password.
+- Sign in and sign out user.
 - Create and view transactions.
 - Localization (English/Spanish).
 
