@@ -8,7 +8,7 @@
 
 <img src="app_preview_banner.png" align="center"/>
 
-Spending tracker app with [Firebase](https://firebase.google.com) as backend and MVC architecture pattern.
+Spending tracker app with Firebase as backend and MVC architecture pattern.
 
 ## Features
 
@@ -28,6 +28,11 @@ Spending tracker app with [Firebase](https://firebase.google.com) as backend and
 - [ ] Save last email enter on login screen.
 
 ## Development
+
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
+- [Firebase](https://firebase.google.com/)
+- [MVC Pattern](https://en.m.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
 | Dependencies                                                                    | <!-- -->                                                        |
 | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
