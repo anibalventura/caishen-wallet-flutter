@@ -7,9 +7,11 @@ class TransactionItem extends StatelessWidget {
   const TransactionItem({
     Key? key,
     required this.transaction,
+    required this.onTap,
   }) : super(key: key);
 
   final TransactionModel transaction;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class TransactionItem extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20.r)),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap as VoidCallback,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -50,7 +52,7 @@ class TransactionItem extends StatelessWidget {
               children: [
                 Text(
                   Utils.formatToMoney(transaction.amount!),
-                  style: Utils.theme(context).textTheme.headline2!.copyWith(
+                  style: Utils.theme(context).textTheme.headline1!.copyWith(
                         color: transaction.type == 0
                             ? Utils.theme(context).errorColor
                             : Utils.theme(context).colorScheme.primary,

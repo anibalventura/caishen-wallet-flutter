@@ -41,6 +41,11 @@ class TransactionsScreen extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return TransactionItem(
                       transaction: snapshot.data![index],
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        AddTransactionScreen.routeName,
+                        arguments: snapshot.data![index],
+                      ),
                     );
                   },
                 );

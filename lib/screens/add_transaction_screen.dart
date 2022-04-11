@@ -1,11 +1,12 @@
 import 'dart:io';
-
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
+import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_date_picker.dart';
 import 'package:caishen_wallet/screens/widgets/bottom_sheet_widget.dart';
 import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/screens/widgets/transaction_field_widget.dart';
+import 'package:caishen_wallet/services/auth.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,13 +29,24 @@ class AddTransactionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _transactionController =
-        Provider.of<TransactionController>(context, listen: false);
+    final args =
+        ModalRoute.of(context)!.settings.arguments as TransactionModel?;
+    final transactionController = Provider.of<TransactionController>(
+      context,
+      listen: false,
+    );
 
-    Future<void> _addTransaction() async {
-      if (_transactionController.amount != 0 &&
-          _transactionController.description.isNotEmpty) {
-        await _transactionController.add();
+    Future<void> _addTransaction(TransactionModel? transaction) async {
+      if (transactionController.amount != 0 ||
+          args?.amount != 0 && transactionController.description.isNotEmpty) {
+        if (args != null) {
+          await transactionController.update(
+            uid: Auth.auth.currentUser!.uid,
+            transaction: transaction!,
+          );
+        } else {
+          await transactionController.add();
+        }
 
         Navigator.of(context).pop();
       } else {
@@ -46,7 +58,7 @@ class AddTransactionScreen extends StatelessWidget {
       }
     }
 
-    void _selectPayment(TransactionController transactionController) {
+    void _selectPayment(String payment) {
       final payment = [
         tr(LocaleTr.paymentCash),
         tr(LocaleTr.paymentCreditCard),
@@ -66,6 +78,7 @@ class AddTransactionScreen extends StatelessWidget {
                 title: Text(payment[index]),
                 onTap: () {
                   transactionController.payment = payment[index];
+                  args?.payment = payment[index];
                   Navigator.of(context).pop();
                 },
               );
@@ -75,7 +88,7 @@ class AddTransactionScreen extends StatelessWidget {
       );
     }
 
-    void _selectCategory(TransactionController transactionController) {
+    void _selectCategory(String category) {
       final category = [
         tr(LocaleTr.categoryFoodDrinks),
         tr(LocaleTr.categoryShopping),
@@ -100,6 +113,7 @@ class AddTransactionScreen extends StatelessWidget {
                 title: Text(category[index]),
                 onTap: () {
                   transactionController.category = category[index];
+                  args?.category = category[index];
                   Navigator.of(context).pop();
                 },
               );
@@ -109,7 +123,7 @@ class AddTransactionScreen extends StatelessWidget {
       );
     }
 
-    void _selectDateAndTime(TransactionController transactionController) {
+    void _selectDateAndTime(DateTime dateAndTime) {
       adaptiveDatePicker(
         context: context,
         minimumDate: DateTime(1),
@@ -117,20 +131,22 @@ class AddTransactionScreen extends StatelessWidget {
         mode: CupertinoDatePickerMode.dateAndTime,
         onDateSelected: (picked) {
           transactionController.dateAndTime = picked;
+          args?.dateAndTime = picked.millisecondsSinceEpoch;
         },
       );
     }
 
-    void _enterDescription(TransactionController transactionController) {
+    void _enterDescription(String description) {
       bottomSheet(
         context: context,
         padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
         body: [
           OutlineFormField(
-            initialValue: transactionController.description,
+            initialValue: description,
             autofocus: true,
             onFieldSubmitted: (value) {
               transactionController.description = value;
+              args?.description = value;
               Navigator.of(context).pop();
             },
           ),
@@ -161,14 +177,22 @@ class AddTransactionScreen extends StatelessWidget {
             ),
             color: Utils.theme(context).iconTheme.color,
             tooltip: tr(LocaleTr.save),
-            onPressed: _addTransaction,
+            onPressed: () => _addTransaction(
+              TransactionModel(
+                id: args?.id,
+                type: args?.type,
+                amount: args?.amount,
+                payment: args?.payment,
+                category: args?.category,
+                dateAndTime: args?.dateAndTime,
+                description: args?.description,
+              ),
+            ),
           ),
         ],
       ),
       body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: SafeArea(
           child: Consumer<TransactionController>(
             builder: (context, transaction, _) {
@@ -183,14 +207,17 @@ class AddTransactionScreen extends StatelessWidget {
                       children: [
                         CupertinoSegmentedControl(
                           children: _transactionTypes,
-                          groupValue: transaction.type,
+                          groupValue: args?.type ?? transaction.type,
                           borderColor: Colors.blueGrey,
                           pressedColor: Colors.blueGrey,
                           selectedColor: Colors.blueGrey,
-                          onValueChanged: (int value) =>
-                              transaction.type = value,
+                          onValueChanged: (int value) {
+                            transaction.type = value;
+                            args?.type = value;
+                          },
                         ),
                         TextFormField(
+                          initialValue: args?.amount.toString(),
                           keyboardType: const TextInputType.numberWithOptions(
                             decimal: true,
                           ),
@@ -199,7 +226,7 @@ class AddTransactionScreen extends StatelessWidget {
                               .headline1!
                               .copyWith(
                                 fontSize: 40.sp,
-                                color: transaction.type == 0
+                                color: args?.type == 0
                                     ? Utils.theme(context).errorColor
                                     : Utils.theme(context).colorScheme.primary,
                               ),
@@ -226,8 +253,10 @@ class AddTransactionScreen extends StatelessWidget {
                               borderSide: BorderSide.none,
                             ),
                           ),
-                          onChanged: (value) =>
-                              transaction.amount = double.parse(value),
+                          onChanged: (value) {
+                            transaction.amount = double.parse(value);
+                            args?.amount = double.parse(value);
+                          },
                         ),
                       ],
                     ),
@@ -240,14 +269,19 @@ class AddTransactionScreen extends StatelessWidget {
                                 ? Icons.payment_outlined
                                 : CupertinoIcons.creditcard,
                             title: tr(LocaleTr.transactionPayment),
-                            trailingValue: transaction.payment,
-                            onTap: () => _selectPayment(transaction),
+                            trailingValue: args?.payment ?? transaction.payment,
+                            onTap: () => _selectPayment(
+                              args?.payment ?? transaction.payment,
+                            ),
                           ),
                           TransactionField(
                             icon: Icons.category_outlined,
                             title: tr(LocaleTr.transactionCategory),
-                            trailingValue: transaction.category,
-                            onTap: () => _selectCategory(transaction),
+                            trailingValue:
+                                args?.category ?? transaction.category,
+                            onTap: () => _selectCategory(
+                              args?.category ?? transaction.category,
+                            ),
                           ),
                           TransactionField(
                             icon: Platform.isAndroid
@@ -255,19 +289,32 @@ class AddTransactionScreen extends StatelessWidget {
                                 : CupertinoIcons.calendar_today,
                             title: tr(LocaleTr.transactionDateTime),
                             trailingValue: Utils.formatDateAndTime(
-                              transaction.dateAndTime,
+                              DateTime.fromMillisecondsSinceEpoch(
+                                args?.dateAndTime ??
+                                    transaction
+                                        .dateAndTime.millisecondsSinceEpoch,
+                              ),
                             ),
                             showTrailingIcon: false,
-                            onTap: () => _selectDateAndTime(transaction),
+                            onTap: () => _selectDateAndTime(
+                              DateTime.fromMillisecondsSinceEpoch(
+                                args?.dateAndTime ??
+                                    transaction
+                                        .dateAndTime.millisecondsSinceEpoch,
+                              ),
+                            ),
                           ),
                           TransactionField(
                             icon: Platform.isAndroid
                                 ? Icons.edit_note_outlined
                                 : CupertinoIcons.pencil_ellipsis_rectangle,
                             title: tr(LocaleTr.transactionDescription),
-                            trailingValue: transaction.description,
+                            trailingValue:
+                                args?.description ?? transaction.description,
                             showTrailingIcon: false,
-                            onTap: () => _enterDescription(transaction),
+                            onTap: () => _enterDescription(
+                              args?.description ?? transaction.description,
+                            ),
                           ),
                         ],
                       ),

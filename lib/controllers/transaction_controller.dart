@@ -58,6 +58,7 @@ class TransactionController extends ChangeNotifier {
     _category = tr(LocaleTr.categoryFoodDrinks);
     _dateAndTime = DateTime.now();
     _description = '';
+    notifyListeners();
   }
 
   Stream<List<TransactionModel>> transactions() {
@@ -124,6 +125,8 @@ class TransactionController extends ChangeNotifier {
         TransactionEnum.dateAndTime.name: transaction.dateAndTime,
         TransactionEnum.description.name: transaction.description,
       });
+
+      _resetValues();
     } catch (e) {
       rethrow;
     }
