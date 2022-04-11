@@ -16,6 +16,7 @@
   "/////////////////// Transactions Screen /////////////////////": "",
   "transactions": "Transacciones",
   "dont_have_transactions": "No tienes transacciones registradas.",
+  "transaction_add": "Añadir",
   "transaction_delete_title": "Eliminar transacción",
   "transaction_delete_msg": "Estás seguro? Esto es permanente.",
   "transaction_delete_snackbar": "Transacción eliminada.",

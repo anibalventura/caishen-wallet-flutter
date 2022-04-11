@@ -26,6 +26,7 @@ class LocaleTr {
   // Transactions.
   static const String transactions = 'transactions';
   static const String dontHaveTransactions = 'dont_have_transactions';
+  static const String transactionAdd = 'transaction_add';
   static const String transactionDeleteTitle = 'transaction_delete_title';
   static const String transactionDeleteMsg = 'transaction_delete_msg';
   static const String transactionDeleteSnackbar = 'transaction_delete_snackbar';

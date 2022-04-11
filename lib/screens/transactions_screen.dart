@@ -26,6 +26,27 @@ class TransactionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Utils.theme(context).scaffoldBackgroundColor,
+        elevation: 0,
+        actions: [
+          if (Platform.isIOS)
+            TextButton(
+              child: Text(
+                tr(LocaleTr.transactionAdd),
+                style: Utils.theme(context).textTheme.bodyText1!.copyWith(
+                      color: Utils.theme(context).primaryColor,
+                    ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AddTransactionScreen.routeName,
+                );
+              },
+            ),
+        ],
+      ),
       body: SafeArea(
         child: StreamBuilder(
           stream: _transactionController.transactions(),
@@ -109,15 +130,18 @@ class TransactionsScreen extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Utils.theme(context).colorScheme.secondary,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        onPressed: () =>
-            Navigator.of(context).pushNamed(AddTransactionScreen.routeName),
-      ),
+      floatingActionButton: Platform.isAndroid
+          ? FloatingActionButton(
+              backgroundColor: Utils.theme(context).colorScheme.secondary,
+              tooltip: tr(LocaleTr.transactionAdd),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              onPressed: () => Navigator.of(context)
+                  .pushNamed(AddTransactionScreen.routeName),
+            )
+          : null,
     );
   }
 }
