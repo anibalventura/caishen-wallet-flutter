@@ -131,4 +131,19 @@ class TransactionController extends ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> delete({
+    required String docId,
+  }) async {
+    try {
+      await _firestore
+          .collection('transactions')
+          .doc(_uid)
+          .collection('transactions')
+          .doc(docId)
+          .delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
