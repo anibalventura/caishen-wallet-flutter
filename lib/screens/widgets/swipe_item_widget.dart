@@ -57,6 +57,9 @@ class SwipeItem extends StatelessWidget {
         margin: _margin,
         child: swipeLeftIcon,
       ),
+      direction: swipeRightAction != null
+          ? DismissDirection.startToEnd
+          : DismissDirection.endToStart,
       confirmDismiss: (direction) async {
         switch (direction) {
           case DismissDirection.startToEnd:
