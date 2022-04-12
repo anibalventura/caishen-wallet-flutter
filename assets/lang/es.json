@@ -22,7 +22,7 @@
   "transaction_delete_snackbar": "Transacción eliminada.",
   "transaction_expense": "Gasto",
   "transaction_income": "Ingreso",
-  "transaction_payment": "Pago",
+  "transaction_payment_type": "Tipo de pago",
   "payment_cash": "Efectivo",
   "payment_credit_card": "Tarjeta de Credito",
   "payment_debit_card": "Tarjeta de Debito",

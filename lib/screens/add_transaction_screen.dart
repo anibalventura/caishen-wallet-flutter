@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:caishen_wallet/controllers/category_controller.dart';
+import 'package:caishen_wallet/controllers/payment_type_controller.dart';
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
 import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_date_picker.dart';
@@ -58,102 +60,6 @@ class AddTransactionScreen extends StatelessWidget {
       }
     }
 
-    void _selectPayment(String payment) {
-      final payment = [
-        tr(LocaleTr.paymentCash),
-        tr(LocaleTr.paymentCreditCard),
-        tr(LocaleTr.paymentDebitCard),
-        tr(LocaleTr.paymentBankTransfer),
-        tr(LocaleTr.paymentOther),
-      ];
-
-      bottomSheet(
-        context: context,
-        body: [
-          ListView.builder(
-            itemCount: payment.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) {
-              return ListTile(
-                title: Text(payment[index]),
-                onTap: () {
-                  transactionController.payment = payment[index];
-                  args?.payment = payment[index];
-                  Navigator.of(context).pop();
-                },
-              );
-            },
-          )
-        ],
-      );
-    }
-
-    void _selectCategory(String category) {
-      final category = [
-        tr(LocaleTr.categoryFoodDrinks),
-        tr(LocaleTr.categoryShopping),
-        tr(LocaleTr.categoryTransport),
-        tr(LocaleTr.categoryHealthFitness),
-        tr(LocaleTr.categoryPersonalCare),
-        tr(LocaleTr.categoryHouse),
-        tr(LocaleTr.categoryInvestment),
-        tr(LocaleTr.categoryVehicle),
-        tr(LocaleTr.categoryEducation),
-        tr(LocaleTr.categoryOther),
-      ];
-
-      bottomSheet(
-        context: context,
-        body: [
-          ListView.builder(
-            itemCount: category.length,
-            shrinkWrap: true,
-            itemBuilder: (_, index) {
-              return ListTile(
-                title: Text(category[index]),
-                onTap: () {
-                  transactionController.category = category[index];
-                  args?.category = category[index];
-                  Navigator.of(context).pop();
-                },
-              );
-            },
-          )
-        ],
-      );
-    }
-
-    void _selectDateAndTime(DateTime dateAndTime) {
-      adaptiveDatePicker(
-        context: context,
-        minimumDate: DateTime(1),
-        maximumDate: DateTime(3000),
-        mode: CupertinoDatePickerMode.dateAndTime,
-        onDateSelected: (picked) {
-          transactionController.dateAndTime = picked;
-          args?.dateAndTime = picked.millisecondsSinceEpoch;
-        },
-      );
-    }
-
-    void _enterDescription(String description) {
-      bottomSheet(
-        context: context,
-        padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-        body: [
-          OutlineFormField(
-            initialValue: description,
-            autofocus: true,
-            onFieldSubmitted: (value) {
-              transactionController.description = value;
-              args?.description = value;
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade50,
@@ -182,7 +88,7 @@ class AddTransactionScreen extends StatelessWidget {
                 id: args?.id,
                 type: args?.type,
                 amount: args?.amount,
-                payment: args?.payment,
+                paymentType: args?.paymentType,
                 category: args?.category,
                 dateAndTime: args?.dateAndTime,
                 description: args?.description,
@@ -268,10 +174,35 @@ class AddTransactionScreen extends StatelessWidget {
                             icon: Platform.isAndroid
                                 ? Icons.payment_outlined
                                 : CupertinoIcons.creditcard,
-                            title: tr(LocaleTr.transactionPayment),
-                            trailingValue: args?.payment ?? transaction.payment,
-                            onTap: () => _selectPayment(
-                              args?.payment ?? transaction.payment,
+                            title: tr(LocaleTr.transactionPaymentType),
+                            trailingValue:
+                                args?.paymentType ?? transaction.paymentType,
+                            onTap: () => bottomSheet(
+                              context: context,
+                              body: [
+                                Consumer<PaymentTypeController>(
+                                  builder: (context, paymentType, _) {
+                                    final paymentTypes = paymentType.items;
+
+                                    return ListView.builder(
+                                      itemCount: paymentTypes.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (_, index) {
+                                        return ListTile(
+                                          title: Text(paymentTypes[index]),
+                                          onTap: () {
+                                            transactionController.paymentType =
+                                                paymentTypes[index];
+                                            args?.paymentType =
+                                                paymentTypes[index];
+                                            Navigator.of(context).pop();
+                                          },
+                                        );
+                                      },
+                                    );
+                                  },
+                                )
+                              ],
                             ),
                           ),
                           TransactionField(
@@ -279,8 +210,31 @@ class AddTransactionScreen extends StatelessWidget {
                             title: tr(LocaleTr.transactionCategory),
                             trailingValue:
                                 args?.category ?? transaction.category,
-                            onTap: () => _selectCategory(
-                              args?.category ?? transaction.category,
+                            onTap: () => bottomSheet(
+                              context: context,
+                              body: [
+                                Consumer<CategoryController>(
+                                  builder: (context, category, _) {
+                                    final categories = category.items;
+
+                                    return ListView.builder(
+                                      itemCount: categories.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (_, index) {
+                                        return ListTile(
+                                          title: Text(categories[index]),
+                                          onTap: () {
+                                            transactionController.category =
+                                                categories[index];
+                                            args?.category = categories[index];
+                                            Navigator.of(context).pop();
+                                          },
+                                        );
+                                      },
+                                    );
+                                  },
+                                )
+                              ],
                             ),
                           ),
                           TransactionField(
@@ -296,12 +250,16 @@ class AddTransactionScreen extends StatelessWidget {
                               ),
                             ),
                             showTrailingIcon: false,
-                            onTap: () => _selectDateAndTime(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                args?.dateAndTime ??
-                                    transaction
-                                        .dateAndTime.millisecondsSinceEpoch,
-                              ),
+                            onTap: () => adaptiveDatePicker(
+                              context: context,
+                              minimumDate: DateTime(1),
+                              maximumDate: DateTime(3000),
+                              mode: CupertinoDatePickerMode.dateAndTime,
+                              onDateSelected: (picked) {
+                                transactionController.dateAndTime = picked;
+                                args?.dateAndTime =
+                                    picked.millisecondsSinceEpoch;
+                              },
                             ),
                           ),
                           TransactionField(
@@ -312,8 +270,22 @@ class AddTransactionScreen extends StatelessWidget {
                             trailingValue:
                                 args?.description ?? transaction.description,
                             showTrailingIcon: false,
-                            onTap: () => _enterDescription(
-                              args?.description ?? transaction.description,
+                            onTap: () => bottomSheet(
+                              context: context,
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: 0.05.sw),
+                              body: [
+                                OutlineFormField(
+                                  initialValue: args?.description ??
+                                      transaction.description,
+                                  autofocus: true,
+                                  onFieldSubmitted: (value) {
+                                    transactionController.description = value;
+                                    args?.description = value;
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ],

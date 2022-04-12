@@ -32,7 +32,7 @@ class LocaleTr {
   static const String transactionDeleteSnackbar = 'transaction_delete_snackbar';
   static const String transactionExpense = 'transaction_expense';
   static const String transactionIncome = 'transaction_income';
-  static const String transactionPayment = 'transaction_payment';
+  static const String transactionPaymentType = 'transaction_payment_type';
   static const String paymentCash = 'payment_cash';
   static const String paymentCreditCard = 'payment_credit_card';
   static const String paymentDebitCard = 'payment_debit_card';

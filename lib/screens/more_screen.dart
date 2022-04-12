@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:caishen_wallet/screens/profile_screen.dart';
+import 'package:caishen_wallet/screens/widgets/adaptive_scroll_view.dart';
 import 'package:caishen_wallet/screens/widgets/more_item_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
@@ -21,47 +22,50 @@ class MoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GridView(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 5 / 3,
-            maxCrossAxisExtent: 0.5.sw,
-            mainAxisSpacing: 0.04.sh,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 0.05.sw,
-            vertical: 0.02.sh,
-          ),
-          children: [
-            MoreItem(
-              icon: Platform.isAndroid
-                  ? Icons.person_outline
-                  : CupertinoIcons.person,
-              title: tr(LocaleTr.moreProfile),
-              onTap: () =>
-                  Navigator.of(context).pushNamed(ProfileScreen.routeName),
+        child: AdaptiveScrollView(
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              childAspectRatio: 5 / 3,
+              maxCrossAxisExtent: 0.5.sw,
+              mainAxisSpacing: 0.04.sh,
             ),
-            MoreItem(
-              icon: Platform.isAndroid
-                  ? Icons.settings_applications_outlined
-                  : CupertinoIcons.settings,
-              title: tr(LocaleTr.moreSettings),
-              onTap: () => showSnackbar(
-                context: context,
-                msg: 'Coming soon!',
-                color: Utils.theme(context).colorScheme.primary,
+            padding: EdgeInsets.symmetric(
+              horizontal: 0.05.sw,
+              vertical: 0.02.sh,
+            ),
+            children: [
+              MoreItem(
+                icon: Platform.isAndroid
+                    ? Icons.person_outline
+                    : CupertinoIcons.person,
+                title: tr(LocaleTr.moreProfile),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(ProfileScreen.routeName),
               ),
-            ),
-            MoreItem(
-              icon:
-                  Platform.isAndroid ? Icons.star_border : CupertinoIcons.star,
-              title: tr(LocaleTr.moreAbout),
-              onTap: () => showSnackbar(
-                context: context,
-                msg: 'Coming soon!',
-                color: Utils.theme(context).colorScheme.primary,
+              MoreItem(
+                icon: Platform.isAndroid
+                    ? Icons.settings_applications_outlined
+                    : CupertinoIcons.settings,
+                title: tr(LocaleTr.moreSettings),
+                onTap: () => showSnackbar(
+                  context: context,
+                  msg: 'Coming soon!',
+                  color: Utils.theme(context).colorScheme.primary,
+                ),
               ),
-            ),
-          ],
+              MoreItem(
+                icon: Platform.isAndroid
+                    ? Icons.star_border
+                    : CupertinoIcons.star,
+                title: tr(LocaleTr.moreAbout),
+                onTap: () => showSnackbar(
+                  context: context,
+                  msg: 'Coming soon!',
+                  color: Utils.theme(context).colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

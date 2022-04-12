@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 enum TransactionEnum {
   type,
   amount,
-  payment,
+  paymentType,
   category,
   dateAndTime,
   description,
@@ -14,7 +14,7 @@ class TransactionModel {
     this.id,
     required this.type,
     required this.amount,
-    required this.payment,
+    required this.paymentType,
     required this.category,
     required this.dateAndTime,
     required this.description,
@@ -26,7 +26,7 @@ class TransactionModel {
     id = documentSnapshot.id;
     type = documentSnapshot[TransactionEnum.type.name] as int;
     amount = documentSnapshot[TransactionEnum.amount.name] as double;
-    payment = documentSnapshot[TransactionEnum.payment.name] as String;
+    paymentType = documentSnapshot[TransactionEnum.paymentType.name] as String;
     category = documentSnapshot[TransactionEnum.category.name] as String;
     dateAndTime = documentSnapshot[TransactionEnum.dateAndTime.name] as int;
     description = documentSnapshot[TransactionEnum.description.name] as String;
@@ -35,7 +35,7 @@ class TransactionModel {
   String? id;
   int? type;
   double? amount;
-  String? payment;
+  String? paymentType;
   String? category;
   int? dateAndTime;
   String? description;

@@ -1,3 +1,5 @@
+import 'package:caishen_wallet/controllers/category_controller.dart';
+import 'package:caishen_wallet/controllers/payment_type_controller.dart';
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
 import 'package:caishen_wallet/screens/add_transaction_screen.dart';
 import 'package:caishen_wallet/screens/dashboard_screen.dart';
@@ -27,6 +29,12 @@ class CaishenWalletApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<TransactionController>(
           create: (_) => TransactionController(),
+        ),
+        ChangeNotifierProvider<CategoryController>(
+          create: (_) => CategoryController(),
+        ),
+        ChangeNotifierProvider<PaymentTypeController>(
+          create: (_) => PaymentTypeController(),
         ),
       ],
       child: ScreenUtilInit(

@@ -23,10 +23,10 @@ class TransactionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _payment = tr(LocaleTr.paymentCash);
-  String get payment => _payment;
-  set payment(String newValue) {
-    _payment = newValue;
+  String _paymentType = tr(LocaleTr.paymentCash);
+  String get paymentType => _paymentType;
+  set paymentType(String newValue) {
+    _paymentType = newValue;
     notifyListeners();
   }
 
@@ -54,7 +54,7 @@ class TransactionController extends ChangeNotifier {
   void _resetValues() {
     _type = 0;
     _amount = 0;
-    _payment = tr(LocaleTr.paymentCash);
+    _paymentType = tr(LocaleTr.paymentCash);
     _category = tr(LocaleTr.categoryFoodDrinks);
     _dateAndTime = DateTime.now();
     _description = '';
@@ -94,7 +94,7 @@ class TransactionController extends ChangeNotifier {
             .add(<String, dynamic>{
           TransactionEnum.type.name: _type,
           TransactionEnum.amount.name: _amount,
-          TransactionEnum.payment.name: _payment,
+          TransactionEnum.paymentType.name: _paymentType,
           TransactionEnum.category.name: _category,
           TransactionEnum.dateAndTime.name: _dateAndTime.millisecondsSinceEpoch,
           TransactionEnum.description.name: _description,
@@ -120,7 +120,7 @@ class TransactionController extends ChangeNotifier {
           .update({
         TransactionEnum.type.name: transaction.type,
         TransactionEnum.amount.name: transaction.amount,
-        TransactionEnum.payment.name: transaction.payment,
+        TransactionEnum.paymentType.name: transaction.paymentType,
         TransactionEnum.category.name: transaction.category,
         TransactionEnum.dateAndTime.name: transaction.dateAndTime,
         TransactionEnum.description.name: transaction.description,
