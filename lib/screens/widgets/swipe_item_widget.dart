@@ -12,6 +12,7 @@ class SwipeItem extends StatelessWidget {
     this.swipeLeftColor,
     this.swipeLeftIcon,
     this.swipeLeftAction,
+    this.dismissDirection,
   }) : super(key: key);
 
   final String itemKey;
@@ -22,44 +23,33 @@ class SwipeItem extends StatelessWidget {
   final Color? swipeLeftColor;
   final Icon? swipeLeftIcon;
   final VoidCallback? swipeLeftAction;
+  final DismissDirection? dismissDirection;
 
   @override
   Widget build(BuildContext context) {
-    final _borderRadius = BorderRadius.circular(30.r);
     final _padding = EdgeInsets.symmetric(
       horizontal: 0.05.sw,
       vertical: 0.02.sh,
     );
-    final _margin = EdgeInsets.symmetric(
-      horizontal: 0.05.sw,
-      vertical: 0.01.sh,
-    );
-
     return Dismissible(
       key: ValueKey(itemKey),
       background: Container(
         decoration: BoxDecoration(
           color: swipeRightColor,
-          borderRadius: _borderRadius,
         ),
         alignment: Alignment.centerLeft,
         padding: _padding,
-        margin: _margin,
         child: swipeRightIcon,
       ),
       secondaryBackground: Container(
         decoration: BoxDecoration(
           color: swipeLeftColor,
-          borderRadius: _borderRadius,
         ),
         alignment: Alignment.centerRight,
         padding: _padding,
-        margin: _margin,
         child: swipeLeftIcon,
       ),
-      direction: swipeRightAction != null
-          ? DismissDirection.startToEnd
-          : DismissDirection.endToStart,
+      direction: dismissDirection ?? DismissDirection.horizontal,
       confirmDismiss: (direction) async {
         switch (direction) {
           case DismissDirection.startToEnd:

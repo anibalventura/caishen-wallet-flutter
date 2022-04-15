@@ -75,11 +75,17 @@ class TransactionsScreen extends StatelessWidget {
                 );
               } else {
                 return AdaptiveScrollView(
-                  child: ListView.builder(
+                  child: ListView.separated(
                     itemCount: snapshot.data!.length,
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        thickness: 1,
+                      );
+                    },
                     itemBuilder: (_, index) {
                       return SwipeItem(
                         itemKey: snapshot.data![index].id!,
+                        dismissDirection: DismissDirection.endToStart,
                         swipeLeftColor: Utils.theme(context).errorColor,
                         swipeLeftIcon: Platform.isAndroid
                             ? const Icon(
@@ -174,17 +180,9 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 0.05.sw,
-        vertical: 0.01.sh,
-      ),
       padding: EdgeInsets.symmetric(
         horizontal: 0.05.sw,
-        vertical: 0.02.sh,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blueGrey.shade50,
-        borderRadius: BorderRadius.all(Radius.circular(20.r)),
+        vertical: 0.01.sh,
       ),
       child: InkWell(
         onTap: onTap,

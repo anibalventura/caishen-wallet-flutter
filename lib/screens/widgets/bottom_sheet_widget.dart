@@ -6,45 +6,59 @@ void bottomSheet({
   required BuildContext? context,
   EdgeInsetsGeometry? padding,
   List<Widget>? actions,
-  List<Widget>? body,
+  Widget? body,
 }) {
   showModalBottomSheet<void>(
     context: context!,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
-      return Container(
-        padding: padding,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
-          color: Utils.theme(context).scaffoldBackgroundColor,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (actions != null)
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 0.055.sw,
-                  vertical: 0.02.sh,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: actions,
-                ),
-              ),
-            Container(
-              padding: EdgeInsets.only(
-                top: actions == null ? 0.055.sw : 0.sw,
-                bottom: 0.02.sh + MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Column(
-                children: body!,
-              ),
+      return DraggableScrollableSheet(
+        expand: false,
+        builder: (context, scrollController) {
+          return Container(
+            padding: padding,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.r),
+              color: Utils.theme(context).scaffoldBackgroundColor,
             ),
-          ],
-        ),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 0.02.sh),
+                    height: 0.01.sh,
+                    width: 0.2.sw,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                if (actions != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 0.055.sw,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: actions,
+                    ),
+                  ),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      top: actions == null ? 0.055.sw : 0.sw,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: body,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       );
     },
   );

@@ -35,25 +35,25 @@ class EditListScreen extends StatelessWidget {
     void addItem() {
       bottomSheet(
         context: context,
-        padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-        body: [
-          Form(
-            key: formKey,
-            child: OutlineFormField(
-              initialValue: '',
-              autofocus: true,
-              textCapitalization: TextCapitalization.words,
-              onFieldSubmitted: (value) {
-                if (args == SettingsEnum.categories) {
-                  _categoryController.add(value);
-                } else {
-                  _paymentTypeController.add(value);
-                }
-                Navigator.of(context).pop();
-              },
-            ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 0.05.sw,
+        ),
+        body: Form(
+          key: formKey,
+          child: OutlineFormField(
+            initialValue: '',
+            autofocus: true,
+            textCapitalization: TextCapitalization.words,
+            onFieldSubmitted: (value) {
+              if (args == SettingsEnum.categories) {
+                _categoryController.add(value);
+              } else {
+                _paymentTypeController.add(value);
+              }
+              Navigator.of(context).pop();
+            },
           ),
-        ],
+        ),
       );
     }
 
@@ -61,26 +61,23 @@ class EditListScreen extends StatelessWidget {
       bottomSheet(
         context: context,
         padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-        body: [
-          Form(
-            key: formKey,
-            child: OutlineFormField(
-              initialValue: name,
-              autofocus: true,
-              textCapitalization: TextCapitalization.words,
-              onFieldSubmitted: (value) {
-                if (args == SettingsEnum.categories) {
-                  _categoryController
-                      .update(CategoryModel(id: id, name: value));
-                } else {
-                  _paymentTypeController
-                      .update(PaymentTypeModel(id: id, name: value));
-                }
-                Navigator.of(context).pop();
-              },
-            ),
+        body: Form(
+          key: formKey,
+          child: OutlineFormField(
+            initialValue: name,
+            autofocus: true,
+            textCapitalization: TextCapitalization.words,
+            onFieldSubmitted: (value) {
+              if (args == SettingsEnum.categories) {
+                _categoryController.update(CategoryModel(id: id, name: value));
+              } else {
+                _paymentTypeController
+                    .update(PaymentTypeModel(id: id, name: value));
+              }
+              Navigator.of(context).pop();
+            },
           ),
-        ],
+        ),
       );
     }
 
@@ -151,8 +148,7 @@ class EditListScreen extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                             swipeLeftAction: () => deleteItem(item.id!),
-                            swipeRightColor:
-                                Utils.theme(context).highlightColor,
+                            swipeRightColor: Utils.theme(context).hintColor,
                             swipeRightIcon: Platform.isAndroid
                                 ? const Icon(
                                     Icons.edit,
