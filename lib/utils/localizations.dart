@@ -61,4 +61,12 @@ class LocaleTr {
   static const String profileSignOut = 'profile_sign_out';
   static const String moreSettings = 'more_settings';
   static const String moreAbout = 'more_about';
+
+  // Settings screen.
+  static const String settingsCategories = 'settings_categories';
+  static const String settingsCategoriesEditSnackbar =
+      'settings_categories_edit_snackbar';
+  static const String settingsPaymentTypes = 'settings_payment_types';
+  static const String settingsPaymentTypesEditSnackbar =
+      'settings_payment_types_edit_snackbar';
 }

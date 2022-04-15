@@ -64,7 +64,7 @@ class TransactionController extends ChangeNotifier {
   Stream<List<TransactionModel>> transactions() {
     try {
       return _firestore
-          .collection('transactions')
+          .collection('users')
           .doc(_uid)
           .collection('transactions')
           .snapshots()
@@ -88,7 +88,7 @@ class TransactionController extends ChangeNotifier {
     try {
       if (_amount != 0 && _description.isNotEmpty) {
         await _firestore
-            .collection('transactions')
+            .collection('users')
             .doc(_uid)
             .collection('transactions')
             .add(<String, dynamic>{
@@ -107,13 +107,10 @@ class TransactionController extends ChangeNotifier {
     }
   }
 
-  Future<void> update({
-    required String uid,
-    required TransactionModel transaction,
-  }) async {
+  Future<void> update(TransactionModel transaction) async {
     try {
       await _firestore
-          .collection('transactions')
+          .collection('users')
           .doc(_uid)
           .collection('transactions')
           .doc(transaction.id)
@@ -137,7 +134,7 @@ class TransactionController extends ChangeNotifier {
   }) async {
     try {
       await _firestore
-          .collection('transactions')
+          .collection('users')
           .doc(_uid)
           .collection('transactions')
           .doc(docId)

@@ -13,7 +13,7 @@ class RoundButton extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final IconData? icon;
   final Color? iconColor;
   final Color? buttonColor;
@@ -21,7 +21,7 @@ class RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed as VoidCallback,
+      onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
           buttonColor ?? Utils.theme(context).colorScheme.secondary,

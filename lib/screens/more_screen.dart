@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:caishen_wallet/screens/profile_screen.dart';
+import 'package:caishen_wallet/screens/settings_screen.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_scroll_view.dart';
-import 'package:caishen_wallet/screens/widgets/more_item_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
@@ -47,11 +46,8 @@ class MoreScreen extends StatelessWidget {
                     ? Icons.settings_applications_outlined
                     : CupertinoIcons.settings,
                 title: tr(LocaleTr.moreSettings),
-                onTap: () => showSnackbar(
-                  context: context,
-                  msg: 'Coming soon!',
-                  color: Utils.theme(context).colorScheme.primary,
-                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(SettingsScreen.routeName),
               ),
               MoreItem(
                 icon: Platform.isAndroid
@@ -66,6 +62,49 @@ class MoreScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MoreItem extends StatelessWidget {
+  const MoreItem({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
+
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 0.06.sw,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.blueGrey.shade50,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              icon,
+              size: 0.06.sh,
+            ),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ],
         ),
       ),
     );

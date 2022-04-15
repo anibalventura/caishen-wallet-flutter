@@ -49,5 +49,10 @@
   "more_profile": "Profile",
   "profile_sign_out": "Sign out",
   "more_settings": "Settings",
-  "more_about": "About"
+  "more_about": "About",
+  "///////////////////// Settings Screen ///////////////////////": "",
+  "settings_categories": "Categories",
+  "settings_categories_edit_snackbar": "Category edited.",
+  "settings_payment_types": "Payment types",
+  "settings_payment_types_edit_snackbar": "Payment type edited."
 }

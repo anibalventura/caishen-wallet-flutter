@@ -1,4 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:caishen_wallet/controllers/category_controller.dart';
+import 'package:caishen_wallet/controllers/payment_type_controller.dart';
 import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
 import 'package:caishen_wallet/screens/widgets/round_button_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
@@ -45,6 +47,12 @@ class LoginScreen extends StatelessWidget {
             msg: retVal,
             color: Utils.theme(context).errorColor,
           );
+        } else {
+          final categoryController = CategoryController();
+          final paymentTypeController = PaymentTypeController();
+
+          await categoryController.newUser();
+          await paymentTypeController.newUser();
         }
       }
     }

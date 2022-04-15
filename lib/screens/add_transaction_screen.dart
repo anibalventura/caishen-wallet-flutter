@@ -2,13 +2,14 @@ import 'dart:io';
 import 'package:caishen_wallet/controllers/category_controller.dart';
 import 'package:caishen_wallet/controllers/payment_type_controller.dart';
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
+import 'package:caishen_wallet/models/category_model.dart';
+import 'package:caishen_wallet/models/payment_type_model.dart';
 import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_date_picker.dart';
 import 'package:caishen_wallet/screens/widgets/bottom_sheet_widget.dart';
+import 'package:caishen_wallet/screens/widgets/liquid_progress_indicator_widget.dart';
 import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
-import 'package:caishen_wallet/screens/widgets/transaction_field_widget.dart';
-import 'package:caishen_wallet/services/auth.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:caishen_wallet/utils/utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,23 +30,21 @@ class AddTransactionScreen extends StatelessWidget {
     1: Text(tr(LocaleTr.transactionIncome)),
   };
 
+  final CategoryController _categoryController = CategoryController();
+  final PaymentTypeController _paymentTypeController = PaymentTypeController();
+
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as TransactionModel?;
-    final transactionController = Provider.of<TransactionController>(
-      context,
-      listen: false,
-    );
+    final transactionController =
+        Provider.of<TransactionController>(context, listen: false);
 
     Future<void> _addTransaction(TransactionModel? transaction) async {
       if (transactionController.amount != 0 ||
           args?.amount != 0 && transactionController.description.isNotEmpty) {
         if (args != null) {
-          await transactionController.update(
-            uid: Auth.auth.currentUser!.uid,
-            transaction: transaction!,
-          );
+          await transactionController.update(transaction!);
         } else {
           await transactionController.add();
         }
@@ -180,26 +179,36 @@ class AddTransactionScreen extends StatelessWidget {
                             onTap: () => bottomSheet(
                               context: context,
                               body: [
-                                Consumer<PaymentTypeController>(
-                                  builder: (context, paymentType, _) {
-                                    final paymentTypes = paymentType.items;
-
-                                    return ListView.builder(
-                                      itemCount: paymentTypes.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (_, index) {
-                                        return ListTile(
-                                          title: Text(paymentTypes[index]),
-                                          onTap: () {
-                                            transactionController.paymentType =
-                                                paymentTypes[index];
-                                            args?.paymentType =
-                                                paymentTypes[index];
-                                            Navigator.of(context).pop();
-                                          },
-                                        );
-                                      },
-                                    );
+                                StreamBuilder(
+                                  stream: _paymentTypeController.paymentTypes(),
+                                  builder: (
+                                    BuildContext context,
+                                    AsyncSnapshot<List<PaymentTypeModel>>
+                                        snapshot,
+                                  ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.active) {
+                                      return ListView.builder(
+                                        itemCount: snapshot.data!.length,
+                                        shrinkWrap: true,
+                                        itemBuilder: (_, index) {
+                                          final item = snapshot.data![index];
+                                          return ListTile(
+                                            title: Text(item.name!),
+                                            onTap: () {
+                                              transactionController
+                                                  .paymentType = item.name!;
+                                              args?.paymentType = item.name;
+                                              Navigator.of(context).pop();
+                                            },
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return const Scaffold(
+                                        body: LiquidProgressIndicator(),
+                                      );
+                                    }
                                   },
                                 )
                               ],
@@ -213,25 +222,35 @@ class AddTransactionScreen extends StatelessWidget {
                             onTap: () => bottomSheet(
                               context: context,
                               body: [
-                                Consumer<CategoryController>(
-                                  builder: (context, category, _) {
-                                    final categories = category.items;
-
-                                    return ListView.builder(
-                                      itemCount: categories.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (_, index) {
-                                        return ListTile(
-                                          title: Text(categories[index]),
-                                          onTap: () {
-                                            transactionController.category =
-                                                categories[index];
-                                            args?.category = categories[index];
-                                            Navigator.of(context).pop();
-                                          },
-                                        );
-                                      },
-                                    );
+                                StreamBuilder(
+                                  stream: _categoryController.categories(),
+                                  builder: (
+                                    BuildContext context,
+                                    AsyncSnapshot<List<CategoryModel>> snapshot,
+                                  ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.active) {
+                                      return ListView.builder(
+                                        itemCount: snapshot.data!.length,
+                                        shrinkWrap: true,
+                                        itemBuilder: (_, index) {
+                                          final item = snapshot.data![index];
+                                          return ListTile(
+                                            title: Text(item.name!),
+                                            onTap: () {
+                                              transactionController.category =
+                                                  item.name!;
+                                              args?.category = item.name;
+                                              Navigator.of(context).pop();
+                                            },
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return const Scaffold(
+                                        body: LiquidProgressIndicator(),
+                                      );
+                                    }
                                   },
                                 )
                               ],
@@ -296,6 +315,74 @@ class AddTransactionScreen extends StatelessWidget {
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionField extends StatelessWidget {
+  const TransactionField({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.trailingValue,
+    this.showTrailingIcon = true,
+    this.onTap,
+  }) : super(key: key);
+
+  final IconData icon;
+  final String title;
+  final String trailingValue;
+  final bool showTrailingIcon;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const _primaryColor = Colors.blueGrey;
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        color: Colors.blueGrey.shade50,
+        padding: EdgeInsets.symmetric(
+          horizontal: 0.06.sw,
+          vertical: 0.02.sh,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  icon,
+                  color: _primaryColor,
+                ),
+                SizedBox(width: 0.02.sw),
+                Text(
+                  title,
+                  style: Utils.theme(context).textTheme.bodyText2!.copyWith(
+                        color: _primaryColor,
+                      ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  trailingValue,
+                  style: Utils.theme(context).textTheme.bodyText1!.copyWith(
+                        color: _primaryColor,
+                      ),
+                ),
+                if (showTrailingIcon)
+                  const Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                    color: _primaryColor,
+                  ),
+              ],
+            )
+          ],
         ),
       ),
     );

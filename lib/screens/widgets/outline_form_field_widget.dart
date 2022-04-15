@@ -14,6 +14,7 @@ class OutlineFormField extends StatelessWidget {
     this.onFieldSubmitted,
     this.initialValue,
     this.obscureText,
+    this.textCapitalization,
   }) : super(key: key);
 
   final String? labelText;
@@ -23,6 +24,7 @@ class OutlineFormField extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final String? initialValue;
   final bool? obscureText;
+  final TextCapitalization? textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class OutlineFormField extends StatelessWidget {
       onSaved: (value) => onSaved!(value!),
       onFieldSubmitted: (value) => onFieldSubmitted!(value),
       obscureText: obscureText ?? false,
+      textCapitalization: textCapitalization ?? TextCapitalization.none,
       decoration: decoration ??
           InputDecoration(
             labelText: labelText,

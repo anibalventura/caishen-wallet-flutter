@@ -18,10 +18,10 @@ class SwipeItem extends StatelessWidget {
   final Widget child;
   final Color? swipeRightColor;
   final Icon? swipeRightIcon;
-  final Function? swipeRightAction;
+  final VoidCallback? swipeRightAction;
   final Color? swipeLeftColor;
   final Icon? swipeLeftIcon;
-  final Function? swipeLeftAction;
+  final VoidCallback? swipeLeftAction;
 
   @override
   Widget build(BuildContext context) {

@@ -22,9 +22,9 @@ Spending tracker app with Firebase as backend and MVC architecture pattern.
 - [ ] App icon, splash screen and night mode.
 - [ ] Dashboard screen with expenses and incomes.
 - [ ] Filters for transaction screen.
-- [ ] Edit/delete transactions.
+- [x] CRUD transactions.
 - [ ] Profile screen with user details.
-- [ ] Settings screen with CRUD for payment and category lists.
+- [x] Settings screen with CRUD for payment and category lists.
 - [ ] Save last email enter on login screen.
 
 ## Development
