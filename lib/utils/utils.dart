@@ -35,7 +35,7 @@ class Utils {
   /// Format amount to money.
   /// Format => r'$ #,###.##'
   static String formatToMoney(double money) {
-    final moneyFormat = NumberFormat(r'$ #,###.##');
+    final moneyFormat = NumberFormat(r'$ #,###.00');
     return moneyFormat.format(money);
   }
 }

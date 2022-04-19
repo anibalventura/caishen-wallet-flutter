@@ -22,6 +22,8 @@ class LocaleTr {
 
   // Dashboard Screen.
   static const String dashboard = 'dashboard';
+  static const String dashboardExpenses = 'dashboard_expenses';
+  static const String dashboardIncomes = 'dashboard_incomes';
 
   // Transactions.
   static const String transactions = 'transactions';

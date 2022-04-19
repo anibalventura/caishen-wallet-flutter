@@ -13,6 +13,8 @@
   "login_no_account": "No eres un usuario? Crear una cuenta",
   "/////////////////// Dashboard Screen /////////////////////": "",
   "dashboard": "Dashboard",
+  "dashboard_expenses": "Gastos",
+  "dashboard_incomes": "Ingresos",
   "/////////////////// Transactions Screen /////////////////////": "",
   "transactions": "Transacciones",
   "dont_have_transactions": "No tienes transacciones registradas.",
