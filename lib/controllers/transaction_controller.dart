@@ -67,6 +67,7 @@ class TransactionController extends ChangeNotifier {
           .collection('users')
           .doc(_uid)
           .collection('transactions')
+          .orderBy('dateAndTime', descending: true)
           .snapshots()
           .map((query) {
         final retval = <TransactionModel>[];
