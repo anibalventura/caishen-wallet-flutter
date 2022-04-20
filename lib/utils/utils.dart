@@ -25,17 +25,10 @@ class Utils {
     return dateFormat.format(DateTime.fromMillisecondsSinceEpoch(dateTime));
   }
 
-  /// Date and time format DateTime object.
-  /// Format => 'MMM d yyyy, hh:mm a'
-  static String formatDateAndTime(DateTime dateTime) {
-    final dateFormat = DateFormat('MMM d yyyy, hh:mm a');
-    return dateFormat.format(dateTime);
-  }
-
   /// Format amount to money.
   /// Format => r'$ #,###.##'
   static String formatToMoney(double money) {
-    final moneyFormat = NumberFormat(r'$ #,###.00');
+    final moneyFormat = NumberFormat(r'$ #,###.##');
     return moneyFormat.format(money);
   }
 }

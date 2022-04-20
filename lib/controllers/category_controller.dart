@@ -1,20 +1,20 @@
 import 'package:caishen_wallet/models/category_model.dart';
 import 'package:caishen_wallet/services/auth.dart';
+import 'package:caishen_wallet/services/firestore.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class CategoryController {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _uid = Auth.auth.currentUser!.uid;
 
   Stream<List<CategoryModel>> categories() {
     try {
-      return _firestore
-          .collection('users')
+      return Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('categories')
-          .orderBy(CategoryEnum.name.name, descending: false)
+          .collection(FsCollection.categories.name)
+          .orderBy(FsDocCategory.name.name, descending: false)
           .snapshots()
           .map((query) {
         final retval = <CategoryModel>[];
@@ -48,12 +48,12 @@ class CategoryController {
 
     for (final category in categories) {
       try {
-        await _firestore
-            .collection('users')
+        await Firestore.instance
+            .collection(FsCollection.users.name)
             .doc(_uid)
-            .collection('categories')
+            .collection(FsCollection.categories.name)
             .add(<String, dynamic>{
-          CategoryEnum.name.name: category,
+          FsDocCategory.name.name: category,
         });
       } catch (e) {
         rethrow;
@@ -63,12 +63,12 @@ class CategoryController {
 
   Future<void> add(String category) async {
     try {
-      await _firestore
-          .collection('users')
+      await Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('categories')
+          .collection(FsCollection.categories.name)
           .add(<String, dynamic>{
-        CategoryEnum.name.name: category,
+        FsDocCategory.name.name: category,
       });
     } catch (e) {
       rethrow;
@@ -77,13 +77,13 @@ class CategoryController {
 
   Future<void> update(CategoryModel category) async {
     try {
-      await _firestore
-          .collection('users')
+      await Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('categories')
+          .collection(FsCollection.categories.name)
           .doc(category.id)
           .update({
-        CategoryEnum.name.name: category.name,
+        FsDocCategory.name.name: category.name,
       });
     } catch (e) {
       rethrow;
@@ -94,10 +94,10 @@ class CategoryController {
     required String docId,
   }) async {
     try {
-      await _firestore
-          .collection('users')
+      await Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('categories')
+          .collection(FsCollection.categories.name)
           .doc(docId)
           .delete();
     } catch (e) {

@@ -26,11 +26,6 @@ class AddTransactionScreen extends StatelessWidget {
 
   static const String routeName = '/add_transaction_screen';
 
-  final Map<int, Widget> _transactionTypes = {
-    0: Text(tr(LocaleTr.transactionExpense)),
-    1: Text(tr(LocaleTr.transactionIncome)),
-  };
-
   final CategoryController _categoryController = CategoryController();
   final PaymentTypeController _paymentTypeController = PaymentTypeController();
 
@@ -42,8 +37,9 @@ class AddTransactionScreen extends StatelessWidget {
         Provider.of<TransactionController>(context, listen: false);
 
     Future<void> _addTransaction(TransactionModel? transaction) async {
-      if (transactionController.amount != 0 ||
-          args?.amount != 0 && transactionController.description.isNotEmpty) {
+      if (transactionController.amount != 0 && args?.amount != 0 ||
+          transactionController.description.isEmpty &&
+              args?.description == '') {
         if (args != null) {
           await transactionController.update(transaction!);
         } else {
@@ -112,7 +108,10 @@ class AddTransactionScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CupertinoSegmentedControl(
-                          children: _transactionTypes,
+                          children: {
+                            0: Text(tr(LocaleTr.transactionExpense)),
+                            1: Text(tr(LocaleTr.transactionIncome)),
+                          },
                           groupValue: args?.type ?? transaction.type,
                           borderColor: Colors.blueGrey,
                           pressedColor: Colors.blueGrey,
@@ -132,19 +131,27 @@ class AddTransactionScreen extends StatelessWidget {
                               .headline1!
                               .copyWith(
                                 fontSize: 40.sp,
-                                color: args?.type == 0
-                                    ? Utils.theme(context).errorColor
-                                    : Utils.theme(context).colorScheme.primary,
+                                color: args?.type != null
+                                    ? args?.type == 0
+                                        ? Utils.theme(context).errorColor
+                                        : Utils.theme(context)
+                                            .colorScheme
+                                            .primary
+                                    : transaction.type == 0
+                                        ? Utils.theme(context).errorColor
+                                        : Utils.theme(context)
+                                            .colorScheme
+                                            .primary,
                               ),
                           textAlign: TextAlign.right,
                           decoration: InputDecoration(
-                            hintText: '0.00',
+                            hintText: '0',
                             prefixIcon: Icon(
                               Platform.isAndroid
                                   ? Icons.attach_money_rounded
                                   : CupertinoIcons.money_dollar,
                               size: 40.sp,
-                              color: Colors.green,
+                              color: Utils.theme(context).colorScheme.primary,
                             ),
                             prefixIconConstraints: BoxConstraints(
                               minWidth: 0.2.sw,
@@ -268,12 +275,10 @@ class AddTransactionScreen extends StatelessWidget {
                                 ? Icons.date_range_outlined
                                 : CupertinoIcons.calendar_today,
                             title: tr(LocaleTr.transactionDateTime),
-                            trailingValue: Utils.formatDateAndTime(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                args?.dateAndTime ??
-                                    transaction
-                                        .dateAndTime.millisecondsSinceEpoch,
-                              ),
+                            trailingValue: Utils.formatDateAndTimeFromMill(
+                              args?.dateAndTime ??
+                                  transaction
+                                      .dateAndTime.millisecondsSinceEpoch,
                             ),
                             showTrailingIcon: false,
                             onTap: () => adaptiveDatePicker(

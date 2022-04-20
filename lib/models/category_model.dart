@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-enum CategoryEnum {
+enum FsDocCategory {
   name,
 }
 
@@ -14,7 +14,7 @@ class CategoryModel {
     required DocumentSnapshot documentSnapshot,
   }) {
     id = documentSnapshot.id;
-    name = documentSnapshot[CategoryEnum.name.name] as String;
+    name = documentSnapshot[FsDocCategory.name.name] as String;
   }
 
   String? id;

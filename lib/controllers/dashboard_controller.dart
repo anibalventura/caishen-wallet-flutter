@@ -1,26 +1,28 @@
+import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/services/auth.dart';
+import 'package:caishen_wallet/services/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DashboardController {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _uid = Auth.auth.currentUser!.uid;
 
   Stream<double> expenses() {
     try {
-      return _firestore
-          .collection('users')
+      return Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('transactions')
-          .where('type', isEqualTo: 0)
+          .collection(FsCollection.transactions.name)
+          .where(FsDocTransaction.type.name, isEqualTo: 0)
           .snapshots()
           .map((query) {
         var expenses = 0.0;
 
         for (final DocumentSnapshot doc in query.docs) {
           if (DateTime.now().month ==
-              DateTime.fromMillisecondsSinceEpoch(doc['dateAndTime'] as int)
-                  .month) {
-            expenses += doc['amount'] as double;
+              DateTime.fromMillisecondsSinceEpoch(
+                doc[FsDocTransaction.dateAndTime.name] as int,
+              ).month) {
+            expenses += doc[FsDocTransaction.amount.name] as double;
           }
         }
 
@@ -33,20 +35,21 @@ class DashboardController {
 
   Stream<double> incomes() {
     try {
-      return _firestore
-          .collection('users')
+      return Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('transactions')
-          .where('type', isEqualTo: 1)
+          .collection(FsCollection.transactions.name)
+          .where(FsDocTransaction.type.name, isEqualTo: 1)
           .snapshots()
           .map((query) {
         var incomes = 0.0;
 
         for (final DocumentSnapshot doc in query.docs) {
           if (DateTime.now().month ==
-              DateTime.fromMillisecondsSinceEpoch(doc['dateAndTime'] as int)
-                  .month) {
-            incomes += doc['amount'] as double;
+              DateTime.fromMillisecondsSinceEpoch(
+                doc[FsDocTransaction.dateAndTime.name] as int,
+              ).month) {
+            incomes += doc[FsDocTransaction.amount.name] as double;
           }
         }
 

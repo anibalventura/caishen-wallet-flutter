@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-enum PaymentTypeEnum {
+enum FsDocPaymentType {
   name,
 }
 
@@ -14,7 +14,7 @@ class PaymentTypeModel {
     required DocumentSnapshot documentSnapshot,
   }) {
     id = documentSnapshot.id;
-    name = documentSnapshot[PaymentTypeEnum.name.name] as String;
+    name = documentSnapshot[FsDocPaymentType.name.name] as String;
   }
 
   String? id;

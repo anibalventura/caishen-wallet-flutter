@@ -1,12 +1,12 @@
 import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/services/auth.dart';
+import 'package:caishen_wallet/services/firestore.dart';
 import 'package:caishen_wallet/utils/localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TransactionController extends ChangeNotifier {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _uid = Auth.auth.currentUser!.uid;
 
   int _type = 0;
@@ -63,11 +63,11 @@ class TransactionController extends ChangeNotifier {
 
   Stream<List<TransactionModel>> transactions() {
     try {
-      return _firestore
-          .collection('users')
+      return Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('transactions')
-          .orderBy('dateAndTime', descending: true)
+          .collection(FsCollection.transactions.name)
+          .orderBy(FsDocTransaction.dateAndTime.name, descending: true)
           .snapshots()
           .map((query) {
         final retval = <TransactionModel>[];
@@ -88,17 +88,18 @@ class TransactionController extends ChangeNotifier {
   Future<void> add() async {
     try {
       if (_amount != 0 && _description.isNotEmpty) {
-        await _firestore
-            .collection('users')
+        await Firestore.instance
+            .collection(FsCollection.users.name)
             .doc(_uid)
-            .collection('transactions')
+            .collection(FsCollection.transactions.name)
             .add(<String, dynamic>{
-          TransactionEnum.type.name: _type,
-          TransactionEnum.amount.name: _amount,
-          TransactionEnum.paymentType.name: _paymentType,
-          TransactionEnum.category.name: _category,
-          TransactionEnum.dateAndTime.name: _dateAndTime.millisecondsSinceEpoch,
-          TransactionEnum.description.name: _description,
+          FsDocTransaction.type.name: _type,
+          FsDocTransaction.amount.name: _amount,
+          FsDocTransaction.paymentType.name: _paymentType,
+          FsDocTransaction.category.name: _category,
+          FsDocTransaction.dateAndTime.name:
+              _dateAndTime.millisecondsSinceEpoch,
+          FsDocTransaction.description.name: _description,
         });
 
         _resetValues();
@@ -110,18 +111,18 @@ class TransactionController extends ChangeNotifier {
 
   Future<void> update(TransactionModel transaction) async {
     try {
-      await _firestore
-          .collection('users')
+      await Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('transactions')
+          .collection(FsCollection.transactions.name)
           .doc(transaction.id)
           .update({
-        TransactionEnum.type.name: transaction.type,
-        TransactionEnum.amount.name: transaction.amount,
-        TransactionEnum.paymentType.name: transaction.paymentType,
-        TransactionEnum.category.name: transaction.category,
-        TransactionEnum.dateAndTime.name: transaction.dateAndTime,
-        TransactionEnum.description.name: transaction.description,
+        FsDocTransaction.type.name: transaction.type,
+        FsDocTransaction.amount.name: transaction.amount,
+        FsDocTransaction.paymentType.name: transaction.paymentType,
+        FsDocTransaction.category.name: transaction.category,
+        FsDocTransaction.dateAndTime.name: transaction.dateAndTime,
+        FsDocTransaction.description.name: transaction.description,
       });
 
       _resetValues();
@@ -134,10 +135,10 @@ class TransactionController extends ChangeNotifier {
     required String docId,
   }) async {
     try {
-      await _firestore
-          .collection('users')
+      await Firestore.instance
+          .collection(FsCollection.users.name)
           .doc(_uid)
-          .collection('transactions')
+          .collection(FsCollection.transactions.name)
           .doc(docId)
           .delete();
     } catch (e) {
