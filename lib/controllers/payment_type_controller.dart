@@ -17,15 +17,15 @@ class PaymentTypeController {
           .orderBy(FsDocPaymentType.name.name, descending: false)
           .snapshots()
           .map((query) {
-        final retval = <PaymentTypeModel>[];
+        final paymentTypes = <PaymentTypeModel>[];
 
         for (final DocumentSnapshot doc in query.docs) {
-          retval.add(
+          paymentTypes.add(
             PaymentTypeModel.fromDocumentSnapshot(documentSnapshot: doc),
           );
         }
 
-        return retval;
+        return paymentTypes;
       });
     } catch (e) {
       rethrow;

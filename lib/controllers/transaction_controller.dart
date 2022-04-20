@@ -70,15 +70,15 @@ class TransactionController extends ChangeNotifier {
           .orderBy(FsDocTransaction.dateAndTime.name, descending: true)
           .snapshots()
           .map((query) {
-        final retval = <TransactionModel>[];
+        final transactions = <TransactionModel>[];
 
         for (final DocumentSnapshot doc in query.docs) {
-          retval.add(
+          transactions.add(
             TransactionModel.fromDocumentSnapshot(documentSnapshot: doc),
           );
         }
 
-        return retval;
+        return transactions;
       });
     } catch (e) {
       rethrow;

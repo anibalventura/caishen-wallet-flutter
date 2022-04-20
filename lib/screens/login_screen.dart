@@ -25,12 +25,12 @@ class LoginScreen extends StatelessWidget {
 
     Future<void> _logIn() async {
       if (Utils.formIsValid(_formKey)) {
-        final retVal = await Auth.signIn(_email, _password);
+        final signIn = await Auth.signIn(_email, _password);
 
-        if (retVal != 'Success') {
+        if (signIn != 'Success') {
           showSnackbar(
             context: context,
-            msg: retVal,
+            msg: signIn,
             color: Utils.theme(context).errorColor,
           );
         }
@@ -39,12 +39,12 @@ class LoginScreen extends StatelessWidget {
 
     Future<void> _createAccount() async {
       if (Utils.formIsValid(_formKey)) {
-        final retVal = await Auth.createAccount(_email, _password);
+        final createAccount = await Auth.createAccount(_email, _password);
 
-        if (retVal != 'Success') {
+        if (createAccount != 'Success') {
           showSnackbar(
             context: context,
-            msg: retVal,
+            msg: createAccount,
             color: Utils.theme(context).errorColor,
           );
         } else {

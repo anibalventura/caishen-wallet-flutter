@@ -17,15 +17,15 @@ class CategoryController {
           .orderBy(FsDocCategory.name.name, descending: false)
           .snapshots()
           .map((query) {
-        final retval = <CategoryModel>[];
+        final categories = <CategoryModel>[];
 
         for (final DocumentSnapshot doc in query.docs) {
-          retval.add(
+          categories.add(
             CategoryModel.fromDocumentSnapshot(documentSnapshot: doc),
           );
         }
 
-        return retval;
+        return categories;
       });
     } catch (e) {
       rethrow;
