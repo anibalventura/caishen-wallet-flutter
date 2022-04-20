@@ -66,19 +66,19 @@ class LocaleTr {
 
   // More Screen.
   static const String more = 'more';
-  static const String moreProfile = 'more_profile';
-  static const String profileSignOut = 'profile_sign_out';
+  static const String moreAccount = 'more_account';
+  static const String accountSignOut = 'account_sign_out';
   static const String moreSettings = 'more_settings';
   static const String moreAbout = 'more_about';
 
-  // Profile Screen.
-  static const String profileNewUsername = 'profile_new_username';
-  static const String profileNewEmail = 'profile_new_email';
-  static const String profileConfirmEmail = 'profile_confirm_email';
-  static const String profileNewPassword = 'profile_new_password';
-  static const String profileConfirmPassword = 'profile_confirm_password';
-  static const String profileDeleteAccount = 'profile_delete_account';
-  static const String profileDeleteAccountMsg = 'profile_delete_account_msg';
+  // Account Screen.
+  static const String accountNewUsername = 'account_new_username';
+  static const String accountNewEmail = 'account_new_email';
+  static const String accountConfirmEmail = 'account_confirm_email';
+  static const String accountNewPassword = 'account_new_password';
+  static const String accountConfirmPassword = 'account_confirm_password';
+  static const String accountDeleteAccount = 'account_delete_account';
+  static const String accountDeleteAccountMsg = 'account_delete_account_msg';
 
   // Settings screen.
   static const String settingsCategories = 'settings_categories';

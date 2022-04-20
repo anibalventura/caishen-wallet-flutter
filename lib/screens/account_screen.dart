@@ -13,12 +13,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({
+class AccountScreen extends StatelessWidget {
+  AccountScreen({
     Key? key,
   }) : super(key: key);
 
-  static const String routeName = '/profile_screen';
+  static const String routeName = '/account_screen';
 
   final User? user = Auth.auth.currentUser;
 
@@ -35,14 +35,14 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(tr(LocaleTr.moreProfile)),
+        title: Text(tr(LocaleTr.moreAccount)),
       ),
       body: SafeArea(
         child: Center(
           child: AdaptiveScrollView(
             child: Column(
               children: [
-                ProfileItem(
+                AccountItem(
                   icon: Platform.isAndroid
                       ? Icons.person_outline_outlined
                       : CupertinoIcons.person,
@@ -54,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                       body: [
                         OutlineFormField(
                           autofocus: true,
-                          labelText: tr(LocaleTr.profileNewUsername),
+                          labelText: tr(LocaleTr.accountNewUsername),
                           onFieldSubmitted: (value) async {
                             await Auth.changeUsername(value);
                             Navigator.of(context).pop();
@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                 ),
                 const Divider(thickness: 0.5),
-                ProfileItem(
+                AccountItem(
                   icon: Platform.isAndroid
                       ? Icons.mail_outline_outlined
                       : CupertinoIcons.mail,
@@ -77,14 +77,14 @@ class ProfileScreen extends StatelessWidget {
                       body: [
                         OutlineFormField(
                           autofocus: true,
-                          labelText: tr(LocaleTr.profileNewEmail),
+                          labelText: tr(LocaleTr.accountNewEmail),
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (value) => newEmail = value,
                         ),
                         SizedBox(height: 0.02.sh),
                         OutlineFormField(
                           autofocus: true,
-                          labelText: tr(LocaleTr.profileConfirmEmail),
+                          labelText: tr(LocaleTr.accountConfirmEmail),
                           textInputAction: TextInputAction.done,
                           onFieldSubmitted: (value) async {
                             if (newEmail == value) {
@@ -98,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                 ),
                 const Divider(thickness: 0.5),
-                ProfileItem(
+                AccountItem(
                   icon: Icons.password_outlined,
                   title: tr(LocaleTr.loginPassword),
                   value: '******',
@@ -108,14 +108,14 @@ class ProfileScreen extends StatelessWidget {
                       body: [
                         OutlineFormField(
                           autofocus: true,
-                          labelText: tr(LocaleTr.profileNewPassword),
+                          labelText: tr(LocaleTr.accountNewPassword),
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (value) => newPassword = value,
                         ),
                         SizedBox(height: 0.02.sh),
                         OutlineFormField(
                           autofocus: true,
-                          labelText: tr(LocaleTr.profileConfirmPassword),
+                          labelText: tr(LocaleTr.accountConfirmPassword),
                           textInputAction: TextInputAction.done,
                           onFieldSubmitted: (value) async {
                             if (newPassword == value) {
@@ -131,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                 const Divider(thickness: 0.5),
                 ListTile(
                   title: Text(
-                    tr(LocaleTr.profileDeleteAccount),
+                    tr(LocaleTr.accountDeleteAccount),
                     style: TextStyle(
                       color: Utils.theme(context).colorScheme.error,
                     ),
@@ -139,8 +139,8 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () async {
                     adaptiveActionBottomSheet(
                       context: context,
-                      title: tr(LocaleTr.profileDeleteAccount),
-                      message: tr(LocaleTr.profileDeleteAccountMsg),
+                      title: tr(LocaleTr.accountDeleteAccount),
+                      message: tr(LocaleTr.accountDeleteAccountMsg),
                       actions: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 0.07.sh),
                 RoundButton(
-                  title: tr(LocaleTr.profileSignOut),
+                  title: tr(LocaleTr.accountSignOut),
                   onPressed: () async {
                     await Auth.signOut();
                     Navigator.of(context).pop();
@@ -182,8 +182,8 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileItem extends StatelessWidget {
-  const ProfileItem({
+class AccountItem extends StatelessWidget {
+  const AccountItem({
     Key? key,
     required this.icon,
     required this.title,

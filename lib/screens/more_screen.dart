@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:caishen_wallet/screens/profile_screen.dart';
+import 'package:caishen_wallet/screens/account_screen.dart';
 import 'package:caishen_wallet/screens/settings_screen.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_scroll_view.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
@@ -37,9 +37,9 @@ class MoreScreen extends StatelessWidget {
                 icon: Platform.isAndroid
                     ? Icons.person_outline
                     : CupertinoIcons.person,
-                title: tr(LocaleTr.moreProfile),
+                title: tr(LocaleTr.moreAccount),
                 onTap: () =>
-                    Navigator.of(context).pushNamed(ProfileScreen.routeName),
+                    Navigator.of(context).pushNamed(AccountScreen.routeName),
               ),
               MoreItem(
                 icon: Platform.isAndroid
