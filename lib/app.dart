@@ -1,10 +1,13 @@
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
+import 'package:caishen_wallet/screens/account_screen.dart';
 import 'package:caishen_wallet/screens/add_transaction_screen.dart';
+import 'package:caishen_wallet/screens/create_account_screen.dart';
 import 'package:caishen_wallet/screens/dashboard_screen.dart';
+import 'package:caishen_wallet/screens/edit_list_screen.dart';
 import 'package:caishen_wallet/screens/home_screen.dart';
 import 'package:caishen_wallet/screens/login_screen.dart';
 import 'package:caishen_wallet/screens/more_screen.dart';
-import 'package:caishen_wallet/screens/profile_screen.dart';
+import 'package:caishen_wallet/screens/settings_screen.dart';
 import 'package:caishen_wallet/screens/transactions_screen.dart';
 import 'package:caishen_wallet/screens/widgets/liquid_progress_indicator_widget.dart';
 import 'package:caishen_wallet/services/auth.dart';
@@ -36,11 +39,15 @@ class CaishenWalletApp extends StatelessWidget {
             theme: Themes.lightTheme,
             darkTheme: Themes.darkTheme,
             routes: {
+              CreateAccountScreen.routeName: (context) =>
+                  const CreateAccountScreen(),
               DashboardScreen.routeName: (_) => const DashboardScreen(),
-              TransactionsScreen.routeName: (_) => TransactionsScreen(),
+              TransactionsScreen.routeName: (_) => const TransactionsScreen(),
               AddTransactionScreen.routeName: (_) => AddTransactionScreen(),
               MoreScreen.routeName: (_) => const MoreScreen(),
-              ProfileScreen.routeName: (_) => const ProfileScreen(),
+              AccountScreen.routeName: (_) => AccountScreen(),
+              SettingsScreen.routeName: (_) => const SettingsScreen(),
+              EditListScreen.routeName: (_) => EditListScreen(),
             },
             home: StreamBuilder(
               stream: Auth().user,

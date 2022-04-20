@@ -4,8 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void bottomSheet({
   required BuildContext? context,
-  EdgeInsetsGeometry? padding,
-  List<Widget>? actions,
+  Color? backgroundColor,
   List<Widget>? body,
 }) {
   showModalBottomSheet<void>(
@@ -14,36 +13,24 @@ void bottomSheet({
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        padding: padding,
+        padding: EdgeInsets.symmetric(
+          horizontal: 0.1.sw,
+          vertical: 0.05.sh,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color: Utils.theme(context).scaffoldBackgroundColor,
+          color:
+              backgroundColor ?? Utils.theme(context).scaffoldBackgroundColor,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (actions != null)
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 0.055.sw,
-                  vertical: 0.02.sh,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: actions,
-                ),
-              ),
-            Container(
-              padding: EdgeInsets.only(
-                top: actions == null ? 0.055.sw : 0.sw,
-                bottom: 0.02.sh + MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Column(
-                children: body!,
-              ),
-            ),
-          ],
+        child: Container(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: body!,
+          ),
         ),
       );
     },
