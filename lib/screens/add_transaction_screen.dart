@@ -7,6 +7,7 @@ import 'package:caishen_wallet/models/payment_type_model.dart';
 import 'package:caishen_wallet/models/transaction_model.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_date_picker.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_scroll_view.dart';
+import 'package:caishen_wallet/screens/widgets/bottom_sheet_list_widget.dart';
 import 'package:caishen_wallet/screens/widgets/bottom_sheet_widget.dart';
 import 'package:caishen_wallet/screens/widgets/liquid_progress_indicator_widget.dart';
 import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
@@ -180,7 +181,7 @@ class AddTransactionScreen extends StatelessWidget {
                             title: tr(LocaleTr.transactionPaymentType),
                             trailingValue:
                                 args?.paymentType ?? transaction.paymentType,
-                            onTap: () => bottomSheet(
+                            onTap: () => bottomSheetList(
                               context: context,
                               body: StreamBuilder(
                                 stream: _paymentTypeController.paymentTypes(),
@@ -195,9 +196,8 @@ class AddTransactionScreen extends StatelessWidget {
                                       child: ListView.separated(
                                         itemCount: snapshot.data!.length,
                                         shrinkWrap: true,
-                                        separatorBuilder: (context, index) {
-                                          return const Divider();
-                                        },
+                                        separatorBuilder: (context, index) =>
+                                            const Divider(),
                                         itemBuilder: (_, index) {
                                           final item = snapshot.data![index];
                                           return ListTile(
@@ -226,7 +226,7 @@ class AddTransactionScreen extends StatelessWidget {
                             title: tr(LocaleTr.transactionCategory),
                             trailingValue:
                                 args?.category ?? transaction.category,
-                            onTap: () => bottomSheet(
+                            onTap: () => bottomSheetList(
                               context: context,
                               body: StreamBuilder(
                                 stream: _categoryController.categories(),
@@ -240,9 +240,8 @@ class AddTransactionScreen extends StatelessWidget {
                                       child: ListView.separated(
                                         itemCount: snapshot.data!.length,
                                         shrinkWrap: true,
-                                        separatorBuilder: (context, index) {
-                                          return const Divider();
-                                        },
+                                        separatorBuilder: (context, index) =>
+                                            const Divider(),
                                         itemBuilder: (_, index) {
                                           final item = snapshot.data![index];
                                           return ListTile(
@@ -299,19 +298,21 @@ class AddTransactionScreen extends StatelessWidget {
                             showTrailingIcon: false,
                             onTap: () => bottomSheet(
                               context: context,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 0.05.sw,
-                              ),
-                              body: OutlineFormField(
-                                initialValue: args?.description ??
-                                    transaction.description,
-                                autofocus: true,
-                                onFieldSubmitted: (value) {
-                                  transactionController.description = value;
-                                  args?.description = value;
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                              body: [
+                                OutlineFormField(
+                                  autofocus: true,
+                                  labelText: tr(
+                                    LocaleTr.transactionDescription,
+                                  ),
+                                  initialValue: args?.description ??
+                                      transaction.description,
+                                  onFieldSubmitted: (value) {
+                                    transactionController.description = value;
+                                    args?.description = value;
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
                             ),
                           ),
                         ],

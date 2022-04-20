@@ -1,5 +1,6 @@
 import 'package:caishen_wallet/controllers/transaction_controller.dart';
 import 'package:caishen_wallet/screens/add_transaction_screen.dart';
+import 'package:caishen_wallet/screens/create_account_screen.dart';
 import 'package:caishen_wallet/screens/dashboard_screen.dart';
 import 'package:caishen_wallet/screens/edit_list_screen.dart';
 import 'package:caishen_wallet/screens/home_screen.dart';
@@ -38,11 +39,13 @@ class CaishenWalletApp extends StatelessWidget {
             theme: Themes.lightTheme,
             darkTheme: Themes.darkTheme,
             routes: {
+              CreateAccountScreen.routeName: (context) =>
+                  const CreateAccountScreen(),
               DashboardScreen.routeName: (_) => const DashboardScreen(),
               TransactionsScreen.routeName: (_) => const TransactionsScreen(),
               AddTransactionScreen.routeName: (_) => AddTransactionScreen(),
               MoreScreen.routeName: (_) => const MoreScreen(),
-              ProfileScreen.routeName: (_) => const ProfileScreen(),
+              ProfileScreen.routeName: (_) => ProfileScreen(),
               SettingsScreen.routeName: (_) => const SettingsScreen(),
               EditListScreen.routeName: (_) => EditListScreen(),
             },

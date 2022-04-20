@@ -13,6 +13,7 @@ class LocaleTr {
   // Errors.
   static const String emptyFormFieldError = 'empty_form_field_error';
   static const String completeFieldError = 'complete_field_error';
+  static const String passwordsMatchError = 'passwords_match_error';
 
   // Login Screen.
   static const String loginEmail = 'login_email';
@@ -20,6 +21,12 @@ class LocaleTr {
   static const String loginSignIn = 'login_sign_in';
   static const String loginNoAccount = 'login_no_account';
 
+  // Create Account Screen.
+  static const String createAccount = 'create_account';
+  static const String createAccountUsername = 'create_account_username';
+  static const String createAccountConfirmPassword =
+      'create_account_confirm_password';
+      
   // Dashboard Screen.
   static const String dashboard = 'dashboard';
   static const String dashboardExpenses = 'dashboard_expenses';
@@ -63,6 +70,15 @@ class LocaleTr {
   static const String profileSignOut = 'profile_sign_out';
   static const String moreSettings = 'more_settings';
   static const String moreAbout = 'more_about';
+
+  // Profile Screen.
+  static const String profileNewUsername = 'profile_new_username';
+  static const String profileNewEmail = 'profile_new_email';
+  static const String profileConfirmEmail = 'profile_confirm_email';
+  static const String profileNewPassword = 'profile_new_password';
+  static const String profileConfirmPassword = 'profile_confirm_password';
+  static const String profileDeleteAccount = 'profile_delete_account';
+  static const String profileDeleteAccountMsg = 'profile_delete_account_msg';
 
   // Settings screen.
   static const String settingsCategories = 'settings_categories';

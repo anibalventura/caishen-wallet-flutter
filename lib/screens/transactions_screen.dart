@@ -77,11 +77,9 @@ class TransactionsScreen extends StatelessWidget {
                 return AdaptiveScrollView(
                   child: ListView.separated(
                     itemCount: snapshot.data!.length,
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        thickness: 1,
-                      );
-                    },
+                    separatorBuilder: (context, index) => const Divider(
+                      thickness: 1,
+                    ),
                     itemBuilder: (_, index) {
                       return SwipeItem(
                         itemKey: snapshot.data![index].id!,

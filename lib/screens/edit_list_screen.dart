@@ -5,7 +5,7 @@ import 'package:caishen_wallet/models/category_model.dart';
 import 'package:caishen_wallet/models/payment_type_model.dart';
 import 'package:caishen_wallet/screens/settings_screen.dart';
 import 'package:caishen_wallet/screens/widgets/adaptive_scroll_view.dart';
-import 'package:caishen_wallet/screens/widgets/bottom_sheet_widget.dart';
+import 'package:caishen_wallet/screens/widgets/bottom_sheet_list_widget.dart';
 import 'package:caishen_wallet/screens/widgets/liquid_progress_indicator_widget.dart';
 import 'package:caishen_wallet/screens/widgets/outline_form_field_widget.dart';
 import 'package:caishen_wallet/screens/widgets/snackbar_widget.dart';
@@ -33,7 +33,7 @@ class EditListScreen extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments;
 
     void addItem() {
-      bottomSheet(
+      bottomSheetList(
         context: context,
         padding: EdgeInsets.symmetric(
           horizontal: 0.05.sw,
@@ -58,7 +58,7 @@ class EditListScreen extends StatelessWidget {
     }
 
     void editItem(String id, String name) {
-      bottomSheet(
+      bottomSheetList(
         context: context,
         padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
         body: Form(
@@ -129,9 +129,7 @@ class EditListScreen extends StatelessWidget {
                     return AdaptiveScrollView(
                       child: ListView.separated(
                         itemCount: snapshot.data!.length,
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
+                        separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (_, index) {
                           final item = snapshot.data![index];
 
@@ -184,9 +182,7 @@ class EditListScreen extends StatelessWidget {
                     return AdaptiveScrollView(
                       child: ListView.separated(
                         itemCount: snapshot.data!.length,
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        },
+                        separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (_, index) {
                           final item = snapshot.data![index];
 
