@@ -103,6 +103,8 @@ class TransactionController extends ChangeNotifier {
         });
 
         _resetValues();
+      } else {
+        throw Exception();
       }
     } catch (e) {
       rethrow;
@@ -111,21 +113,25 @@ class TransactionController extends ChangeNotifier {
 
   Future<void> update(TransactionModel transaction) async {
     try {
-      await Firestore.instance
-          .collection(FsCollection.users.name)
-          .doc(_uid)
-          .collection(FsCollection.transactions.name)
-          .doc(transaction.id)
-          .update({
-        FsDocTransaction.type.name: transaction.type,
-        FsDocTransaction.amount.name: transaction.amount,
-        FsDocTransaction.paymentType.name: transaction.paymentType,
-        FsDocTransaction.category.name: transaction.category,
-        FsDocTransaction.dateAndTime.name: transaction.dateAndTime,
-        FsDocTransaction.description.name: transaction.description,
-      });
+      if (transaction.amount != 0 && transaction.description!.isNotEmpty) {
+        await Firestore.instance
+            .collection(FsCollection.users.name)
+            .doc(_uid)
+            .collection(FsCollection.transactions.name)
+            .doc(transaction.id)
+            .update({
+          FsDocTransaction.type.name: transaction.type,
+          FsDocTransaction.amount.name: transaction.amount,
+          FsDocTransaction.paymentType.name: transaction.paymentType,
+          FsDocTransaction.category.name: transaction.category,
+          FsDocTransaction.dateAndTime.name: transaction.dateAndTime,
+          FsDocTransaction.description.name: transaction.description,
+        });
 
-      _resetValues();
+        _resetValues();
+      } else {
+        throw Exception();
+      }
     } catch (e) {
       rethrow;
     }

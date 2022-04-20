@@ -37,17 +37,13 @@ class AddTransactionScreen extends StatelessWidget {
         Provider.of<TransactionController>(context, listen: false);
 
     Future<void> _addTransaction(TransactionModel? transaction) async {
-      if (transactionController.amount != 0 && args?.amount != 0 ||
-          transactionController.description.isEmpty &&
-              args?.description == '') {
-        if (args != null) {
-          await transactionController.update(transaction!);
-        } else {
-          await transactionController.add();
-        }
+      try {
+        args != null
+            ? await transactionController.update(transaction!)
+            : await transactionController.add();
 
         Navigator.of(context).pop();
-      } else {
+      } catch (e) {
         showSnackbar(
           context: context,
           msg: tr(LocaleTr.completeFieldError),
